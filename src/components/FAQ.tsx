@@ -1,46 +1,46 @@
-import { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: 'Vale a pena investir em redes sociais? Realmente dá resultado?',
+    question: "Vale a pena investir em redes sociais? Realmente dá resultado?",
     answer:
-      'Sim! Meu foco não é apenas deixar o perfil bonito, mas sim gerar performance: aumentar o fluxo de mensagens recebidas. Isso é alcançado através de publicações frequentes, estratégicas e consistentes. Meus clientes comprovam isso, com média de permanência de 2 anos e 3 meses.',
+      "Sim! Meu foco não é apenas deixar o perfil bonito, mas sim gerar performance: aumentar o fluxo de mensagens recebidas. Isso é alcançado através de publicações frequentes, estratégicas e consistentes. Meus clientes comprovam isso, com média de permanência de 2 anos e 3 meses.",
   },
   {
-    question: 'Como funciona o processo de aprovação dos conteúdos?',
+    question: "Como funciona o processo de aprovação dos conteúdos?",
     answer:
-      'Crio todos os conteúdos e envio para você através de uma ferramenta específica de aprovação. Nenhum post é publicado sem sua revisão e aprovação prévia. Você tem total controle sobre o que vai ao ar.',
+      "Crio todos os conteúdos e envio para você através de uma ferramenta específica de aprovação. Nenhum post é publicado sem sua revisão e aprovação prévia. Você tem total controle sobre o que vai ao ar.",
   },
   {
-    question: 'Os posts seguem as normas do CFM?',
+    question: "Os posts seguem as normas do CFM?",
     answer:
-      'Sim, absolutamente! Todos os conteúdos são criados seguindo rigorosamente as normas de publicidade do Conselho Federal de Medicina. Sua segurança profissional é prioridade.',
+      "Sim, absolutamente! Todos os conteúdos são criados seguindo rigorosamente as normas de publicidade do Conselho Federal de Medicina. Sua segurança profissional é prioridade.",
   },
   {
-    question: 'Não é muito caro contratar esse serviço?',
+    question: "Não é muito caro contratar esse serviço?",
     answer:
-      'Na verdade, não! Sem vínculo trabalhista, você economiza todos os encargos CLT (que representam 70-100% do salário). Um funcionário com salário mínimo custa entre R$ 2.580 e R$ 3.036 para a empresa. Meus pacotes custam muito menos e você pode cancelar quando quiser, sem burocracia.',
+      "Na verdade, não! Sem vínculo trabalhista, você economiza todos os encargos CLT (que representam 70-100% do salário). Um funcionário com salário mínimo custa entre R$ 2.580 e R$ 3.036 para a empresa. Meus pacotes custam muito menos e você pode cancelar quando quiser, sem burocracia.",
   },
   {
-    question: 'Você cuida dos Directs (mensagens) do Instagram?',
+    question: "Você cuida dos Directs (mensagens) do Instagram?",
     answer:
-      'Não. Meu foco é na criação e publicação de conteúdos estratégicos. O atendimento via Direct fica com sua equipe, pois eles têm acesso interno às informações da clínica e agenda.',
+      "Não. Meu foco é na criação e publicação de conteúdos estratégicos. O atendimento via Direct fica com sua equipe, pois eles têm acesso interno às informações da clínica e agenda.",
   },
   {
-    question: 'Posso cancelar quando quiser?',
+    question: "Posso cancelar quando quiser?",
     answer:
-      'Sim! Não há fidelidade ou burocracia. É um risco que assumo justamente para oferecer flexibilidade. Meu trabalho fala por si: meu primeiro cliente ainda está comigo e tenho baixíssimo churn.',
+      "Sim! Não há fidelidade ou burocracia. É um risco que assumo justamente para oferecer flexibilidade. Meu trabalho fala por si: meu primeiro cliente ainda está comigo e tenho baixíssimo churn.",
   },
   {
-    question: 'Como funciona a edição de vídeos?',
+    question: "Como funciona a edição de vídeos?",
     answer:
-      'Edito até 2 vídeos por semana de até 1 minuto cada (plano Essencial e Performance) para reels. São vídeos profissionais, otimizados para engajamento máximo nas redes sociais.',
+      "Você tem direito a até 2 vídeos por semana de até 1 minuto cada (plano Essencial e Performance) para reels. São vídeos profissionais, otimizados para engajamento máximo nas redes sociais.",
   },
   {
-    question: 'O que está incluído na gestão do Google Meu Negócio?',
+    question: "O que está incluído na gestão do Google Meu Negócio?",
     answer:
-      'No plano Premium, faço a criação, configuração e gestão completa do Google Meu Negócio: otimização para buscas locais, gerenciamento de avaliações, criação de posts e atualização constante das informações.',
+      "No plano Premium, faço a criação, configuração e gestão completa do Google Meu Negócio: otimização para buscas locais, gerenciamento de avaliações, criação de posts e atualização constante das informações.",
   },
 ];
 
@@ -78,13 +78,13 @@ export default function FAQ() {
                 </span>
                 <ChevronDown
                   className={`w-6 h-6 text-gray-600 flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? 'transform rotate-180' : ''
+                    openIndex === index ? "transform rotate-180" : ""
                   }`}
                 />
               </button>
               <div
                 className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? 'max-h-96' : 'max-h-0'
+                  openIndex === index ? "max-h-96" : "max-h-0"
                 }`}
               >
                 <div className="px-8 pb-6 text-gray-700 leading-relaxed bg-gray-50">
