@@ -20,15 +20,18 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 text-left text-white">
-        <h1 className="text-4xl md:text-8xl font-bold mb-6 leading-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
           Transforme seguidores <br />
           em pacientes particulares <br />
           na sua clínica.
         </h1>
-        <p className="text-sm md:text-5xl mb-10 font-light max-w-5xl mx-auto">
-          Você cuida da saúde dos seus pacientes, eu cuido para que
-          <strong>sua agenda esteja sempre cheia</strong>. Gestão de redes
-          sociais, tráfego pago e posicionamento digital com ética e resultado.
+        <p className="text-base md:text-xl lg:text-2xl mb-10 font-light max-w-3xl">
+          Você cuida da saúde dos seus pacientes, eu cuido para que{" "}
+          <strong className="font-semibold">
+            sua agenda esteja sempre cheia
+          </strong>
+          . Gestão de redes sociais, tráfego pago e posicionamento digital com
+          ética e resultado.
         </p>
         <button
           onClick={scrollToContact}

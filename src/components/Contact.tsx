@@ -6,7 +6,7 @@ export default function Contact() {
       id="contato"
       className="py-24 bg-gradient-to-br from-blue-600 to-blue-700 text-white"
     >
-      <div className="max-w-7xl mx-auto px-1">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             Vamos Conversar?
@@ -30,11 +30,13 @@ export default function Contact() {
 
           <a
             href="mailto:manager.carloshenrique@gmail.com"
-            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20 overflow-hidden"
           >
             <Mail className="w-6 h-6 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">Email</h3>
-            <p className="text-blue-100">manager.carloshenrique@gmail.com</p>
+            <p className="text-blue-100 break-all md:break-words text-sm md:text-base">
+              manager.carloshenrique@gmail.com
+            </p>
           </a>
 
           <div className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center border border-white/20">
