@@ -18,6 +18,7 @@ type PortfolioItemType = {
   type: "video" | "gallery" | "standard";
   videoUrls?: string[];
   videoCaptions?: string[]; // NOVA LINHA: Legendas para os vídeos
+  videoThumbs?: string[]; // NOVA LINHA: Thumbs para os vídeos
   galleryImages?: string[];
   galleryCaptions?: string[]; // NOVA LINHA: Legendas para as fotos
 };
@@ -43,6 +44,13 @@ const portfolioItems: PortfolioItemType[] = [
       "Vídeo educativo: Elevando o nível de consciência do seguidor",
       "Reels informativo: Intuito de receber mais mensagens",
       "Datas especiais: Vídeo gerado com IA + Design estático",
+    ],
+    videoThumbs: [
+      "https://res.cloudinary.com/dg7yrvjwu/video/upload/v1763674921/Video_by_clinicagamarpombal_rcnsc0.jpg",
+      "https://res.cloudinary.com/dg7yrvjwu/video/upload/v1763674929/Video_by_clinicaottomais_oqtpzx.jpg",
+      "https://res.cloudinary.com/dg7yrvjwu/video/upload/v1763674938/Video_by_clinicaottomais2_zvv0ky.jpg",
+      "https://res.cloudinary.com/dg7yrvjwu/video/upload/v1763674941/Video_by_clinicagamarpombal2_qcaxho.jpg",
+      "https://res.cloudinary.com/dg7yrvjwu/video/upload/v1763675823/Video_by_cleansauderioreal_vg3vjo.jpg",
     ],
   },
   {
@@ -273,6 +281,7 @@ export default function Portfolio() {
                     <video
                       key={currentGalleryIndex}
                       src={selectedItem.videoUrls[currentGalleryIndex]}
+                      poster={selectedItem.videoThumbs?.[currentGalleryIndex]}
                       controls
                       autoPlay
                       className="max-w-full max-h-[80vh] w-full h-full rounded-lg shadow-2xl bg-black"
