@@ -1,6 +1,11 @@
 import { Mail, Phone, MapPin } from "lucide-react";
+import { trackEvent } from "../lib/meta-pixel";
 
 export default function Contact() {
+  const handleContact = (type: string) => {
+    trackEvent("Contact", { content_name: type });
+  };
+
   return (
     <section
       id="contato"
@@ -18,10 +23,11 @@ export default function Contact() {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
           <a
+            onClick={() => handleContact("WhatsApp Card")}
             href="https://wa.me/5575981865878"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20"
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20 cursor-pointer"
           >
             <Phone className="w-6 h-6 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">WhatsApp</h3>
@@ -29,8 +35,9 @@ export default function Contact() {
           </a>
 
           <a
+            onClick={() => handleContact("Email Card")}
             href="mailto:manager.carloshenrique@gmail.com"
-            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20 overflow-hidden"
+            className="bg-white/10 backdrop-blur-lg p-8 rounded-2xl text-center hover:bg-white/20 transition-all duration-300 hover:scale-105 border border-white/20 overflow-hidden cursor-pointer"
           >
             <Mail className="w-6 h-6 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">Email</h3>
@@ -51,10 +58,11 @@ export default function Contact() {
             Resposta em até 24 horas úteis
           </p>
           <a
+            onClick={() => handleContact("WhatsApp CTA Bottom")}
             href="https://wa.me/5575981865878"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-white text-blue-600 px-10 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:scale-105"
+            className="inline-block bg-white text-blue-600 px-10 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 shadow-2xl hover:scale-105 cursor-pointer"
           >
             Falar no WhatsApp Agora
           </a>

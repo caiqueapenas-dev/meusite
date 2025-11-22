@@ -10,8 +10,15 @@ import FAQ from "./components/FAQ";
 import Contact from "./components/Contact";
 import WhatsAppButton from "./components/WhatsAppButton";
 import Footer from "./components/Footer";
+import { useEffect } from "react";
+import { initPixel, trackEvent } from "./lib/meta-pixel";
 
 function App() {
+  useEffect(() => {
+    initPixel();
+    trackEvent("ViewContent"); // Rastreia visita à página inicial
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <Hero />
