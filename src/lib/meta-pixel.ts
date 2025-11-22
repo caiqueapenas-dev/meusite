@@ -53,7 +53,8 @@ export const trackEvent = async (eventName: string, customData = {}) => {
 
   // 2. Rastreamento via Servidor (CAPI via Vercel Function)
   try {
-    await fetch("/api/meta-events", {
+    // Nome genérico '/api/app-digest' para evitar AdBlockers
+    await fetch("/api/app-digest", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
