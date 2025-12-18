@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Clients from "./components/Clients"; // Importado
+import GamaCalendar from "./components/GamaCalendar";
 import Portfolio from "./components/Portfolio";
 import AIHighlight from "./components/AIHighlight.tsx"; // Importado
 import About from "./components/About";
@@ -18,6 +19,10 @@ function App() {
     initPixel();
     trackEvent("ViewContent"); // Rastreia visita à página inicial
   }, []);
+
+  if (decodeURIComponent(window.location.pathname) === "/calendário/clínica-gama") {
+    return <GamaCalendar />;
+  }
 
   return (
     <div className="min-h-screen bg-white">

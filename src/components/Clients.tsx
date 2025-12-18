@@ -14,12 +14,6 @@ const clients = [
       "https://res.cloudinary.com/dg7yrvjwu/image/upload/v1761666357/d8mns9shm92qqlctthtz.ico",
   },
   {
-    name: "Clínica Otto+",
-    handle: "@clinicaottomais",
-    image:
-      "https://res.cloudinary.com/dg7yrvjwu/image/upload/v1761663899/ulzhru6s6hjqhhgwmwhe.ico",
-  },
-  {
     name: "CMBB",
     handle: "@centromedicobressanbonfim",
     image:
