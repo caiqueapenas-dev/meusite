@@ -25,11 +25,6 @@ const clients = [
     image:
       "https://res.cloudinary.com/dg7yrvjwu/image/upload/v1763681864/cs_-_icon_in5vwf.ico",
   },
-  {
-    name: "E muito mais",
-    image:
-      "https://res.cloudinary.com/dg7yrvjwu/image/upload/v1763682076/dfc31c7d-d713-4c9f-9943-d826c9d1e112.png",
-  },
 ];
 
 export default function Clients() {
