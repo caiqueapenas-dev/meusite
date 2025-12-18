@@ -20,7 +20,7 @@ function App() {
     trackEvent("ViewContent"); // Rastreia visita à página inicial
   }, []);
 
-  if (decodeURIComponent(window.location.pathname) === "/calendário/clínica-gama") {
+  if (window.location.pathname === "/calendario/clinica-gama") {
     return <GamaCalendar />;
   }
 
