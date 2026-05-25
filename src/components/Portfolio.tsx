@@ -9,10 +9,11 @@ import {
   ChevronRight,
   Maximize2,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type PortfolioItemType = {
   title: string;
-  icon: any;
+  icon: LucideIcon;
   description: string;
   image: string;
   type: "video" | "gallery" | "standard";
