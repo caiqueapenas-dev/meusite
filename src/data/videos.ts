@@ -1,4 +1,4 @@
-export type VideoCategory = "Long-form" | "Shorts" | "Montage" | "Retention";
+export type VideoCategory = "Long-form" | "Shorts" | "Montage" | "ReplayMod cinematic";
 
 export type PortfolioVideo = {
   title: string;
@@ -9,6 +9,8 @@ export type PortfolioVideo = {
   metric: string;
   youtubeId: string;
   tone: "emerald" | "cyan" | "amber" | "crimson";
+  previewStart?: number;
+  previewEnd?: number;
 };
 
 // Paste only the YouTube video ID here, not the full URL.
@@ -19,17 +21,19 @@ export const portfolioVideos: PortfolioVideo[] = [
     role: "Featured portfolio edit",
     category: "Long-form",
     duration: "YouTube",
-    hook: "A live portfolio piece showing pacing, gaming rhythm, scene selection, and creator-focused editing decisions.",
-    metric: "Watch the featured edit",
+    hook: "A versatile gameplay edit built around clean pacing, creator rhythm, and fun moments.",
+    metric: "Story, timing, and watchability",
     youtubeId: "4uCf080MwRM",
     tone: "emerald",
+    previewStart: 0,
+    previewEnd: 3,
   },
   {
     title: "PvP chaos highlight chain",
     role: "Short-form repack",
     category: "Shorts",
     duration: "30-60 sec",
-    hook: "Instant action, captions that land the joke, punchy zooms, and a loopable final beat.",
+    hook: "Fast action, captions, zooms, and punchy sound design when the video needs energy.",
     metric: "Built for Shorts, TikTok, and Reels",
     youtubeId: "",
     tone: "cyan",
@@ -39,19 +43,21 @@ export const portfolioVideos: PortfolioVideo[] = [
     role: "Cinematic gameplay cut",
     category: "Montage",
     duration: "1-3 min",
-    hook: "Progression edits, music timing, reveal staging, and satisfying block-by-block momentum.",
-    metric: "Made for spectacle and pacing",
+    hook: "Slower pacing, music timing, atmosphere, and reveals that feel worth watching.",
+    metric: "For moments that need space",
     youtubeId: "",
     tone: "amber",
   },
   {
-    title: "Challenge video retention pass",
-    role: "Narrative restructure",
-    category: "Retention",
-    duration: "10-18 min",
-    hook: "Stronger stakes, fewer slow sections, better chapter rhythm, and clearer viewer rewards.",
-    metric: "Reworked around the hook",
-    youtubeId: "",
+    title: "ReplayMod cinematic scenes",
+    role: "Extra Minecraft capture",
+    category: "ReplayMod cinematic",
+    duration: "YouTube",
+    hook: "Extra scenes captured with ReplayMod, client skin, and the shader style the creator prefers.",
+    metric: "Cinematics beyond the raw footage",
+    youtubeId: "UmDtfR1sejY",
     tone: "crimson",
+    previewStart: 0,
+    previewEnd: 3,
   },
 ];

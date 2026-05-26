@@ -7,7 +7,6 @@ import {
   Gamepad2,
   Layers3,
   Mail,
-  MessageCircle,
   MousePointer2,
   Play,
   Scissors,
@@ -20,70 +19,73 @@ import {
 import { portfolioVideos, type PortfolioVideo, type VideoCategory } from "./data/videos";
 import { initPixel, trackEvent } from "./lib/meta-pixel";
 
+const email = "editor.carloshenrique@gmail.com";
+const mailto = `mailto:${email}?subject=Minecraft%20gameplay%20editing%20project`;
+
 const filters: Array<"All" | VideoCategory> = [
   "All",
   "Long-form",
   "Shorts",
   "Montage",
-  "Retention",
+  "ReplayMod cinematic",
 ];
 
 const services = [
   {
     icon: Scissors,
-    title: "Retention-first gameplay cuts",
-    body: "Dead air removed, jokes protected, story beats rearranged, and every minute cut to keep viewers moving forward.",
-  },
-  {
-    icon: Gamepad2,
-    title: "Minecraft-native pacing",
-    body: "Survival arcs, PvP tension, modded chaos, build reveals, and challenge videos edited with creator-side context.",
-  },
-  {
-    icon: Sparkles,
-    title: "Short-form repacks",
-    body: "Long episodes turned into punchy Shorts, TikToks, and Reels with captions, beat hits, zooms, and clean loops.",
+    title: "Story-first pacing",
+    body: "More than cutting silence. I shape the video so the run feels fun, readable, and worth finishing.",
   },
   {
     icon: Zap,
-    title: "Sound design and impact",
-    body: "UI clicks, whooshes, block hits, bass drops, comedic stings, and controlled silence where the moment needs space.",
+    title: "Clean or high-energy",
+    body: "Slow, calm, oldschool edits when the moment needs room. Bigger effects when the video needs impact.",
+  },
+  {
+    icon: Gamepad2,
+    title: "Minecraft-native taste",
+    body: "Survival, PvP, build reveals, SMP episodes, modded chaos, and creator-led gameplay rhythm.",
+  },
+  {
+    icon: Sparkles,
+    title: "ReplayMod extras",
+    body: "When needed, I can capture cinematic scenes with your skin and the shader style you prefer.",
   },
 ];
 
 const process = [
-  "Raw footage and creator notes",
-  "Hook map and timeline structure",
-  "Gameplay cut, captions, SFX",
-  "Review pass and final export",
+  "Brief + references",
+  "Story and pacing pass",
+  "Style, SFX, captions",
+  "Review until it feels right",
 ];
 
-const packages = [
+const fitCards = [
   {
-    name: "Spawn Cut",
-    scope: "Short-form edits",
-    detail: "For clips, memes, highlights, quick wins, and testing formats before scaling volume.",
-    items: ["Vertical edit", "Caption styling", "SFX and zoom pass"],
+    name: "Creator Fit",
+    scope: "30k-120k subs",
+    detail: "For Minecraft creators with room to grow who do not want editing to steal upload time.",
+    items: ["You keep creating", "I handle the cut", "Built around your channel"],
   },
   {
-    name: "Redstone Build",
-    scope: "YouTube episodes",
-    detail: "For Minecraft creators who need stronger pacing across survival, SMP, PvP, or challenge videos.",
-    items: ["Full gameplay edit", "Retention restructuring", "Thumbnail frame exports"],
+    name: "Style Range",
+    scope: "Calm to intense",
+    detail: "Adaptable editing: clean storytelling, slow pacing, oldschool fun, or high-energy visual effects.",
+    items: ["Client references welcome", "Flexible pacing", "Channel-specific taste"],
   },
   {
-    name: "Endgame System",
-    scope: "Monthly editing partner",
-    detail: "For creators who want a consistent editor who understands the channel, audience, and content rhythm.",
-    items: ["Batch delivery", "Reusable style system", "Shorts from long-form"],
+    name: "Project Terms",
+    scope: "Simple payment",
+    detail: "PayPal, Wise, or custom agreement. No hard revision cap as long as feedback stays reasonable.",
+    items: ["PayPal", "Wise", "Unlimited sensible revisions"],
   },
 ];
 
 const stats = [
-  { value: "Minecraft", label: "gameplay niche" },
-  { value: "Shorts + long", label: "format range" },
-  { value: "Hook first", label: "editing logic" },
-  { value: "YouTube", label: "portfolio source" },
+  { value: "30k-120k", label: "target creator size" },
+  { value: "Clean + intense", label: "style range" },
+  { value: "ReplayMod", label: "extra scenes" },
+  { value: "No hard cap", label: "sensible revisions" },
 ];
 
 const hasPlayableVideo = (video: PortfolioVideo) =>
@@ -91,6 +93,24 @@ const hasPlayableVideo = (video: PortfolioVideo) =>
 
 const getThumbnailUrl = (youtubeId: string) =>
   `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
+
+const getPreviewUrl = (video: PortfolioVideo) => {
+  const start = video.previewStart ?? 0;
+  const end = video.previewEnd ?? start + 3;
+
+  return `https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=${video.youtubeId}&start=${start}&end=${end}&rel=0&modestbranding=1&disablekb=1`;
+};
+
+function MicroTimeline() {
+  return (
+    <div className="micro-timeline" aria-hidden="true">
+      <span className="clip clip-a" />
+      <span className="clip clip-b" />
+      <span className="clip clip-c" />
+      <span className="micro-playhead" />
+    </div>
+  );
+}
 
 function App() {
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
@@ -127,7 +147,7 @@ function App() {
   return (
     <main className="site-shell">
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Caique Edits home">
+        <a className="brand" href="#top" aria-label="Carlos Henrique home">
           <span className="brand-mark" aria-hidden="true">
             <span />
             <span />
@@ -135,24 +155,24 @@ function App() {
             <span />
           </span>
           <span>
-            <strong>Caique Edits</strong>
-            <small>Gameplay video editor</small>
+            <strong>Carlos Henrique</strong>
+            <small>Minecraft video editor</small>
           </span>
         </a>
 
         <nav className="main-nav" aria-label="Main navigation">
           <a href="#work">Work</a>
-          <a href="#services">Services</a>
+          <a href="#services">Style</a>
           <a href="#process">Process</a>
         </nav>
 
         <a
           className="nav-cta"
-          href="https://wa.me/5575981865878?text=Hey%20Caique%2C%20I%20need%20Minecraft%20gameplay%20video%20editing."
-          onClick={() => void trackEvent("Contact", { channel: "whatsapp_header" })}
+          href={mailto}
+          onClick={() => void trackEvent("Contact", { channel: "email_header" })}
         >
-          <MessageCircle size={18} />
-          Start a project
+          <Mail size={18} />
+          Send a brief
         </a>
       </header>
 
@@ -160,12 +180,12 @@ function App() {
         <div className="hero-copy">
           <p className="eyebrow">
             <Blocks size={16} />
-            Minecraft gameplay editing for global creators
+            Minecraft editing for growing creators
           </p>
-          <h1>Gameplay videos cut like worlds worth watching.</h1>
+          <h1>Gameplay edits with story, pace, and taste.</h1>
           <p className="hero-lede">
-            I edit Minecraft footage into sharp, high-energy YouTube videos with stronger hooks,
-            cleaner pacing, punchier sound design, and a visual language built for gamer audiences.
+            I help Minecraft creators turn raw footage into videos that feel fun to watch:
+            clean when they should breathe, high-energy when they should hit.
           </p>
 
           <div className="hero-actions">
@@ -179,7 +199,7 @@ function App() {
             </a>
             <a
               className="secondary-action"
-              href="mailto:manager.carloshenrique@gmail.com?subject=Minecraft%20gameplay%20editing%20project"
+              href={mailto}
               onClick={() => void trackEvent("Contact", { channel: "email_hero" })}
             >
               <Mail size={18} />
@@ -208,7 +228,7 @@ function App() {
           </div>
 
           <div className="stage-topbar">
-            <span>Retention timeline</span>
+            <span>Story timeline</span>
             <span>01:26 / 08:40</span>
           </div>
 
@@ -230,7 +250,7 @@ function App() {
             </div>
             <div className="preview-callout">
               <Sparkles size={15} />
-              beat drop
+              fun beat
             </div>
           </div>
 
@@ -258,19 +278,19 @@ function App() {
       <section className="signal-strip" aria-label="What the editing focuses on">
         <div>
           <Timer size={18} />
-          <span>Cold opens that start fast</span>
+          <span>Fun pacing over filler</span>
         </div>
         <div>
           <MousePointer2 size={18} />
-          <span>Clicks protected by pacing</span>
+          <span>Creator taste first</span>
         </div>
         <div>
           <Trophy size={18} />
-          <span>Moments shaped into story</span>
+          <span>Oldschool spirit, modern polish</span>
         </div>
         <div>
           <Layers3 size={18} />
-          <span>Reusable channel style systems</span>
+          <span>ReplayMod scenes when needed</span>
         </div>
       </section>
 
@@ -278,13 +298,10 @@ function App() {
         <div className="section-heading">
           <p className="eyebrow">
             <Clapperboard size={16} />
-            Portfolio workbench
+            Portfolio
           </p>
-          <h2>Your YouTube edits, presented like a creator control room.</h2>
-          <p>
-            Paste your own YouTube IDs into the portfolio data file and the site pulls the
-            thumbnails and playable embeds automatically.
-          </p>
+          <h2>Live YouTube work, with moving previews.</h2>
+          <p>Each card can pull a muted 3-second YouTube preview and open the full video.</p>
         </div>
 
         <div className="filter-row" aria-label="Filter portfolio videos">
@@ -317,7 +334,23 @@ function App() {
               >
                 <div className="poster-frame">
                   {playable ? (
-                    <img src={getThumbnailUrl(video.youtubeId)} alt="" loading="lazy" />
+                    <>
+                      <img
+                        className="poster-thumb"
+                        src={getThumbnailUrl(video.youtubeId)}
+                        alt=""
+                        loading="lazy"
+                      />
+                      <iframe
+                        className="poster-preview"
+                        src={getPreviewUrl(video)}
+                        title={`${video.title} preview`}
+                        loading="lazy"
+                        tabIndex={-1}
+                        aria-hidden="true"
+                        allow="autoplay; encrypted-media"
+                      />
+                    </>
                   ) : (
                     <div className="procedural-poster" aria-hidden="true">
                       <span className="moon" />
@@ -348,9 +381,9 @@ function App() {
         <div className="section-heading compact">
           <p className="eyebrow">
             <Sparkles size={16} />
-            Editing stack
+            Editing style
           </p>
-          <h2>Built for creators who need more than a clean cut.</h2>
+          <h2>Adaptable editing, not one preset.</h2>
         </div>
 
         <div className="service-grid">
@@ -361,6 +394,7 @@ function App() {
                 <Icon size={26} />
                 <h3>{service.title}</h3>
                 <p>{service.body}</p>
+                <MicroTimeline />
               </article>
             );
           })}
@@ -371,25 +405,26 @@ function App() {
         <div className="section-heading">
           <p className="eyebrow">
             <Zap size={16} />
-            Project modes
+            Fit and terms
           </p>
-          <h2>Pick the editing lane that fits your channel stage.</h2>
+          <h2>For creators ready to outsource without losing their voice.</h2>
         </div>
 
         <div className="package-grid">
-          {packages.map((plan) => (
-            <article className="package-card" key={plan.name}>
-              <span>{plan.scope}</span>
-              <h3>{plan.name}</h3>
-              <p>{plan.detail}</p>
+          {fitCards.map((card) => (
+            <article className="package-card" key={card.name}>
+              <span>{card.scope}</span>
+              <h3>{card.name}</h3>
+              <p>{card.detail}</p>
               <ul>
-                {plan.items.map((item) => (
+                {card.items.map((item) => (
                   <li key={item}>
                     <Check size={16} />
                     {item}
                   </li>
                 ))}
               </ul>
+              <MicroTimeline />
             </article>
           ))}
         </div>
@@ -401,7 +436,7 @@ function App() {
             <Layers3 size={16} />
             Workflow
           </p>
-          <h2>Simple pipeline, cinematic output.</h2>
+          <h2>Simple pipeline, creator-aware output.</h2>
         </div>
 
         <div className="process-line">
@@ -409,6 +444,7 @@ function App() {
             <article className="process-step" key={step}>
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{step}</h3>
+              <MicroTimeline />
             </article>
           ))}
         </div>
@@ -420,34 +456,27 @@ function App() {
             <Gamepad2 size={16} />
             Ready for the next upload
           </p>
-          <h2>Send the raw footage. I will turn the run into a video people finish.</h2>
+          <h2>Send the raw footage. I will shape the story.</h2>
           <p>
-            English-facing portfolio, Minecraft-focused editing, and a workflow ready for
-            creators selling to global audiences.
+            No hard revision limit, as long as feedback is reasonable. The goal is a video that
+            feels right for the audience and for the creator.
           </p>
         </div>
         <div className="cta-actions">
           <a
             className="primary-action"
-            href="https://wa.me/5575981865878?text=Hey%20Caique%2C%20I%20want%20to%20hire%20you%20for%20Minecraft%20gameplay%20editing."
-            onClick={() => void trackEvent("Contact", { channel: "whatsapp_footer" })}
-          >
-            <MessageCircle size={19} />
-            Message on WhatsApp
-          </a>
-          <a
-            className="secondary-action"
-            href="mailto:manager.carloshenrique@gmail.com?subject=Minecraft%20gameplay%20editing%20project"
+            href={mailto}
             onClick={() => void trackEvent("Contact", { channel: "email_footer" })}
           >
             <Mail size={18} />
-            Send an email
+            Email Carlos
           </a>
+          <span className="payment-note">PayPal / Wise / custom agreement</span>
         </div>
       </section>
 
       <footer className="site-footer">
-        <span>Caique Edits</span>
+        <span>Carlos Henrique</span>
         <a href="#top">
           Back to top
           <ArrowUpRight size={16} />
