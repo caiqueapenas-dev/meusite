@@ -24,9 +24,8 @@ const mailto = `mailto:${email}?subject=Minecraft%20gameplay%20editing%20project
 
 const filters: Array<"All" | VideoCategory> = [
   "All",
-  "Long-form",
   "Shorts",
-  "Montage",
+  "Long-form",
   "ReplayMod cinematic",
 ];
 
@@ -83,10 +82,40 @@ const fitCards = [
 
 const stats = [
   { value: "30k-120k", label: "target creator size" },
-  { value: "Clean + intense", label: "style range" },
+  { value: "3 trials", label: "before / after samples" },
   { value: "ReplayMod", label: "extra scenes" },
   { value: "No hard cap", label: "sensible revisions" },
 ];
+
+const beforeAfterTrials = [
+  {
+    title: "Basic clip to professional Short",
+    creator: "Carlos | Video Editor",
+    youtubeId: "sLnPMMJrfoQ",
+    before: "A simple gameplay moment with the interesting beat hidden inside the footage.",
+    after: "Tighter rhythm, captions, sound hits, zooms, and a clearer payoff.",
+    service: "Pacing, captions, SFX, visual emphasis",
+    tone: "cyan",
+  },
+  {
+    title: "MonomoTime gameplay trial",
+    creator: "@MonomoTime",
+    youtubeId: "rFc4sJ2bZUE",
+    before: "A clip that needed a faster hook and more readable action.",
+    after: "The moment is framed earlier, reactions land sooner, and the clip feels built for Shorts.",
+    service: "Hook timing, motion, social format polish",
+    tone: "amber",
+  },
+  {
+    title: "WiredLP gameplay trial",
+    creator: "@WiredLP",
+    youtubeId: "Uq-iIjav6Ok",
+    before: "Raw gameplay pacing with room to make the highlight easier to follow.",
+    after: "Cleaner momentum, stronger impact beats, and a more finished creator-ready cut.",
+    service: "Momentum, SFX, pacing polish",
+    tone: "emerald",
+  },
+] as const;
 
 const hasPlayableVideo = (video: PortfolioVideo) =>
   video.youtubeId.trim().length > 0 && !video.youtubeId.includes("PASTE");
@@ -100,6 +129,9 @@ const getPreviewUrl = (video: PortfolioVideo) => {
 
   return `https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=${video.youtubeId}&start=${start}&end=${end}&rel=0&modestbranding=1&disablekb=1`;
 };
+
+const getShortEmbedUrl = (youtubeId: string) =>
+  `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1`;
 
 function MicroTimeline() {
   return (
@@ -161,8 +193,9 @@ function App() {
         </a>
 
         <nav className="main-nav" aria-label="Main navigation">
+          <a href="#trials">Before/After</a>
           <a href="#work">Work</a>
-          <a href="#services">Style</a>
+          <a href="#services">Services</a>
           <a href="#process">Process</a>
         </nav>
 
@@ -185,7 +218,8 @@ function App() {
           <h1>Gameplay edits with story, pace, and taste.</h1>
           <p className="hero-lede">
             I help Minecraft creators turn raw footage into videos that feel fun to watch:
-            clean when they should breathe, high-energy when they should hit.
+            clean when they should breathe, high-energy when they should hit, and clear in
+            before/after trials.
           </p>
 
           <div className="hero-actions">
@@ -294,86 +328,150 @@ function App() {
         </div>
       </section>
 
+      <section className="section trials-section" id="trials">
+        <div className="trial-intro">
+          <div>
+            <p className="eyebrow">
+              <Scissors size={16} />
+              Before / after trials
+            </p>
+            <h2>Raw gameplay becomes a cleaner, sharper Short.</h2>
+          </div>
+          <p>
+            These samples show the service in the most direct way: what the clip needed before,
+            and what changed after pacing, captions, SFX, and visual emphasis.
+          </p>
+        </div>
+
+        <div className="trial-showcase">
+          {beforeAfterTrials.map((trial, index) => (
+            <article className={`trial-card trial-${trial.tone}`} key={trial.youtubeId}>
+              <div className="short-frame">
+                <iframe
+                  src={getShortEmbedUrl(trial.youtubeId)}
+                  title={trial.title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+              <div className="trial-copy">
+                <span className="trial-number">{String(index + 1).padStart(2, "0")}</span>
+                <h3>{trial.title}</h3>
+                <p>{trial.creator}</p>
+                <dl className="trial-delta">
+                  <div>
+                    <dt>Before</dt>
+                    <dd>{trial.before}</dd>
+                  </div>
+                  <div>
+                    <dt>After</dt>
+                    <dd>{trial.after}</dd>
+                  </div>
+                </dl>
+                <small>{trial.service}</small>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="section work-section" id="work">
         <div className="section-heading">
           <p className="eyebrow">
             <Clapperboard size={16} />
             Portfolio
           </p>
-          <h2>Live YouTube work, with moving previews.</h2>
-          <p>Each card can pull a muted 3-second YouTube preview and open the full video.</p>
+          <h2>Live edits, filtered by the kind of clip you need next.</h2>
+          <p>
+            Shorts trials, longer gameplay edits, and ReplayMod work sit together so clients can
+            scan by format instead of reading a wall of services.
+          </p>
         </div>
 
-        <div className="filter-row" aria-label="Filter portfolio videos">
-          {filters.map((filter) => (
-            <button
-              className={filter === activeFilter ? "is-active" : ""}
-              key={filter}
-              type="button"
-              onClick={() => setActiveFilter(filter)}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
+        <div className="portfolio-shell">
+          <aside className="portfolio-note">
+            <span>Selected cuts</span>
+            <strong>{filteredVideos.length}</strong>
+            <p>
+              Use the filters to jump between short-form proof, longer gameplay pacing, and
+              cinematic Minecraft capture.
+            </p>
+          </aside>
 
-        <div className="video-grid">
-          {filteredVideos.map((video) => {
-            const playable = hasPlayableVideo(video);
+          <div className="portfolio-list">
+            <div className="filter-row" aria-label="Filter portfolio videos">
+              {filters.map((filter) => (
+                <button
+                  className={filter === activeFilter ? "is-active" : ""}
+                  key={filter}
+                  type="button"
+                  onClick={() => setActiveFilter(filter)}
+                >
+                  {filter}
+                </button>
+              ))}
+            </div>
 
-            return (
-              <article
-                className={`video-card tone-${video.tone} ${playable ? "is-playable" : ""}`}
-                key={video.title}
-                onClick={() => openVideo(video)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") openVideo(video);
-                }}
-                role={playable ? "button" : undefined}
-                tabIndex={playable ? 0 : undefined}
-              >
-                <div className="poster-frame">
-                  {playable ? (
-                    <>
-                      <img
-                        className="poster-thumb"
-                        src={getThumbnailUrl(video.youtubeId)}
-                        alt=""
-                        loading="lazy"
-                      />
-                      <iframe
-                        className="poster-preview"
-                        src={getPreviewUrl(video)}
-                        title={`${video.title} preview`}
-                        loading="lazy"
-                        tabIndex={-1}
-                        aria-hidden="true"
-                        allow="autoplay; encrypted-media"
-                      />
-                    </>
-                  ) : (
-                    <div className="procedural-poster" aria-hidden="true">
-                      <span className="moon" />
-                      <span className="mountain one" />
-                      <span className="mountain two" />
-                      <span className="avatar" />
+            <div className="video-grid">
+              {filteredVideos.map((video) => {
+                const playable = hasPlayableVideo(video);
+
+                return (
+                  <article
+                    className={`video-card tone-${video.tone} ${playable ? "is-playable" : ""}`}
+                    key={video.title}
+                    onClick={() => openVideo(video)}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter") openVideo(video);
+                    }}
+                    role={playable ? "button" : undefined}
+                    tabIndex={playable ? 0 : undefined}
+                  >
+                    <div className="poster-frame">
+                      {playable ? (
+                        <>
+                          <img
+                            className="poster-thumb"
+                            src={getThumbnailUrl(video.youtubeId)}
+                            alt=""
+                            loading="lazy"
+                          />
+                          <iframe
+                            className="poster-preview"
+                            src={getPreviewUrl(video)}
+                            title={`${video.title} preview`}
+                            loading="lazy"
+                            tabIndex={-1}
+                            aria-hidden="true"
+                            allow="autoplay; encrypted-media"
+                          />
+                        </>
+                      ) : (
+                        <div className="procedural-poster" aria-hidden="true">
+                          <span className="moon" />
+                          <span className="mountain one" />
+                          <span className="mountain two" />
+                          <span className="avatar" />
+                        </div>
+                      )}
+                      <span className="format-pill">{video.category}</span>
+                      <span className="play-pill">
+                        <Play size={15} />
+                        {playable ? "Watch edit" : video.duration}
+                      </span>
                     </div>
-                  )}
-                  <span className="format-pill">{video.category}</span>
-                  <span className="play-pill">
-                    <Play size={15} />
-                    {playable ? "Watch edit" : video.duration}
-                  </span>
-                </div>
-                <div className="video-content">
-                  <span>{video.role}</span>
-                  <h3>{video.title}</h3>
-                  <p>{video.hook}</p>
-                  <small>{video.metric}</small>
-                </div>
-              </article>
-            );
-          })}
+                    <div className="video-content">
+                      <span>{video.role}</span>
+                      <h3>{video.title}</h3>
+                      <p>{video.hook}</p>
+                      <small>{video.metric}</small>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -386,18 +484,33 @@ function App() {
           <h2>Adaptable editing, not one preset.</h2>
         </div>
 
-        <div className="service-grid">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <article className="service-card" key={service.title}>
-                <Icon size={26} />
-                <h3>{service.title}</h3>
-                <p>{service.body}</p>
-                <MicroTimeline />
-              </article>
-            );
-          })}
+        <div className="style-lab">
+          <div className="style-demo">
+            <div className="raw-column">
+              <span>Raw</span>
+              <strong>Footage with good moments buried inside.</strong>
+              <MicroTimeline />
+            </div>
+            <div className="finish-column">
+              <span>Finished</span>
+              <strong>Story beats, captions, SFX, zooms, and clean breathing room.</strong>
+              <MicroTimeline />
+            </div>
+          </div>
+
+          <div className="service-grid">
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <article className="service-card" key={service.title}>
+                  <Icon size={26} />
+                  <h3>{service.title}</h3>
+                  <p>{service.body}</p>
+                  <MicroTimeline />
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -439,14 +552,22 @@ function App() {
           <h2>Simple pipeline, creator-aware output.</h2>
         </div>
 
-        <div className="process-line">
-          {process.map((step, index) => (
-            <article className="process-step" key={step}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{step}</h3>
-              <MicroTimeline />
-            </article>
-          ))}
+        <div className="process-layout">
+          <div className="process-compass">
+            <span>Start</span>
+            <strong>Raw footage</strong>
+            <p>References, channel voice, pacing notes, and upload target come first.</p>
+          </div>
+
+          <div className="process-line">
+            {process.map((step, index) => (
+              <article className="process-step" key={step}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{step}</h3>
+                <MicroTimeline />
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
