@@ -99,9 +99,16 @@ img {
 
 .brand,
 .nav-cta,
+.nav-discord,
 .main-nav {
   display: flex;
   align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .brand {
@@ -170,6 +177,7 @@ img {
 }
 
 .nav-cta,
+.nav-discord,
 .primary-action,
 .secondary-action {
   justify-content: center;
@@ -184,6 +192,11 @@ img {
     color 180ms ease;
 }
 
+.nav-discord,
+.discord-action {
+  cursor: pointer;
+}
+
 .nav-cta,
 .primary-action {
   border: 1px solid rgba(120, 255, 106, 0.58);
@@ -192,13 +205,34 @@ img {
   box-shadow: 0 0 30px rgba(120, 255, 106, 0.18);
 }
 
+.nav-discord {
+  width: 44px;
+  padding: 0;
+  border: 1px solid rgba(79, 216, 255, 0.34);
+  background: rgba(79, 216, 255, 0.08);
+  color: var(--cyan);
+}
+
 .secondary-action {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.04);
   color: var(--text);
 }
 
+.discord-action {
+  border-color: rgba(79, 216, 255, 0.42);
+  color: var(--cyan);
+}
+
+.nav-discord.is-copied,
+.discord-action.is-copied {
+  border-color: rgba(120, 255, 106, 0.58);
+  background: rgba(120, 255, 106, 0.12);
+  color: var(--green);
+}
+
 .nav-cta:hover,
+.nav-discord:hover,
 .primary-action:hover,
 .secondary-action:hover {
   transform: translateY(-2px);

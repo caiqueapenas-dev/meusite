@@ -7,6 +7,7 @@ import {
   Gamepad2,
   Layers3,
   Mail,
+  MessageCircle,
   MousePointer2,
   Play,
   Scissors,
@@ -21,6 +22,8 @@ import { initPixel, trackEvent } from "./lib/meta-pixel";
 
 const email = "editor.carloshenrique@gmail.com";
 const mailto = `mailto:${email}?subject=Minecraft%20gameplay%20editing%20project`;
+const discordHandle = "carlosvideoeditor";
+const discordLabel = `Discord: ${discordHandle}`;
 
 const filters: Array<"All" | VideoCategory> = [
   "All",
@@ -147,6 +150,7 @@ function MicroTimeline() {
 function App() {
   const [activeFilter, setActiveFilter] = useState<(typeof filters)[number]>("All");
   const [activeVideo, setActiveVideo] = useState<PortfolioVideo | null>(null);
+  const [discordCopied, setDiscordCopied] = useState(false);
 
   useEffect(() => {
     initPixel();
@@ -176,6 +180,18 @@ function App() {
 
   const closeVideo = () => setActiveVideo(null);
 
+  const copyDiscord = async (location: string) => {
+    try {
+      await navigator.clipboard.writeText(discordHandle);
+    } catch {
+      // The handle stays visible if clipboard access is blocked.
+    }
+
+    setDiscordCopied(true);
+    window.setTimeout(() => setDiscordCopied(false), 1800);
+    void trackEvent("Contact", { channel: `discord_${location}` });
+  };
+
   return (
     <main className="site-shell">
       <header className="site-header">
@@ -199,14 +215,25 @@ function App() {
           <a href="#process">Process</a>
         </nav>
 
-        <a
-          className="nav-cta"
-          href={mailto}
-          onClick={() => void trackEvent("Contact", { channel: "email_header" })}
-        >
-          <Mail size={18} />
-          Send a brief
-        </a>
+        <div className="header-actions">
+          <button
+            className={`nav-discord ${discordCopied ? "is-copied" : ""}`}
+            type="button"
+            onClick={() => void copyDiscord("header")}
+            aria-label={discordCopied ? "Discord handle copied" : discordLabel}
+            title={discordLabel}
+          >
+            <MessageCircle size={18} />
+          </button>
+          <a
+            className="nav-cta"
+            href={mailto}
+            onClick={() => void trackEvent("Contact", { channel: "email_header" })}
+          >
+            <Mail size={18} />
+            Send a brief
+          </a>
+        </div>
       </header>
 
       <section className="hero-section" id="top">
@@ -239,6 +266,14 @@ function App() {
               <Mail size={18} />
               Email brief
             </a>
+            <button
+              className={`secondary-action discord-action ${discordCopied ? "is-copied" : ""}`}
+              type="button"
+              onClick={() => void copyDiscord("hero")}
+            >
+              <MessageCircle size={18} />
+              {discordCopied ? "Discord copied" : discordLabel}
+            </button>
           </div>
 
           <div className="hero-stats" aria-label="Editing focus">
@@ -592,6 +627,14 @@ function App() {
             <Mail size={18} />
             Email Carlos
           </a>
+          <button
+            className={`secondary-action discord-action ${discordCopied ? "is-copied" : ""}`}
+            type="button"
+            onClick={() => void copyDiscord("footer")}
+          >
+            <MessageCircle size={18} />
+            {discordCopied ? "Discord copied" : discordLabel}
+          </button>
           <span className="payment-note">PayPal / Wise / custom agreement</span>
         </div>
       </section>
