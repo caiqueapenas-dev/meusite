@@ -921,8 +921,7 @@ img {
   background: #081013;
 }
 
-.poster-thumb,
-.poster-preview {
+.poster-thumb {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -931,22 +930,18 @@ img {
 
 .poster-thumb {
   object-fit: cover;
-  transform: scale(1.02);
+  opacity: 0.9;
+  transform: scale(1.03);
+  transition:
+    opacity 180ms ease,
+    transform 220ms ease,
+    filter 220ms ease;
 }
 
-.poster-preview {
-  z-index: 0;
-  width: 120%;
-  height: 120%;
-  border: 0;
-  opacity: 0.78;
-  pointer-events: none;
-  transform: translate(-8%, -8%) scale(1.18);
-}
-
-.video-card:hover .poster-preview {
-  opacity: 0.95;
-  transform: translate(-8%, -8%) scale(1.24);
+.video-card:hover .poster-thumb {
+  opacity: 1;
+  filter: saturate(1.1) contrast(1.06);
+  transform: scale(1.08);
 }
 
 .poster-frame::after {

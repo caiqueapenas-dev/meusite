@@ -126,13 +126,6 @@ const hasPlayableVideo = (video: PortfolioVideo) =>
 const getThumbnailUrl = (youtubeId: string) =>
   `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
 
-const getPreviewUrl = (video: PortfolioVideo) => {
-  const start = video.previewStart ?? 0;
-  const end = video.previewEnd ?? start + 3;
-
-  return `https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&mute=1&controls=0&playsinline=1&loop=1&playlist=${video.youtubeId}&start=${start}&end=${end}&rel=0&modestbranding=1&disablekb=1`;
-};
-
 const getShortEmbedUrl = (youtubeId: string) =>
   `https://www.youtube.com/embed/${youtubeId}?rel=0&modestbranding=1&playsinline=1`;
 
@@ -471,15 +464,6 @@ function App() {
                             src={getThumbnailUrl(video.youtubeId)}
                             alt=""
                             loading="lazy"
-                          />
-                          <iframe
-                            className="poster-preview"
-                            src={getPreviewUrl(video)}
-                            title={`${video.title} preview`}
-                            loading="lazy"
-                            tabIndex={-1}
-                            aria-hidden="true"
-                            allow="autoplay; encrypted-media"
                           />
                         </>
                       ) : (
