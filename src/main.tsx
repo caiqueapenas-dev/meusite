@@ -16,6 +16,12 @@ import {
   Zap,
 } from "lucide-react";
 import { FaDiscord, FaInstagram, FaTiktok, FaXTwitter, FaYoutube } from "react-icons/fa6";
+import afterEffectsLogo from "./images/adobe-after-effects-cc-icon-app-logo-editable-transparent-background-premium-social-media-design-for-digital-download-free-png.webp";
+import flashbackLogo from "./images/flashback.webp";
+import illustratorLogo from "./images/illustrator.webp";
+import premiereLogo from "./images/premiere-pro.webp";
+import replayModLogo from "./images/replaymod.webp";
+import wiredProfile from "./images/wired-profile.png";
 import "./styles.css";
 
 type VideoType = "shorts" | "long";
@@ -30,8 +36,15 @@ type PortfolioVideo = {
 };
 
 const email = "editor.carloshenrique@gmail.com";
-const mailto =
-  `mailto:${email}?subject=Minecraft%20editing%20project&body=Hey%20Carlos%2C%20I%27m%20looking%20for%20a%20Minecraft%20video%20editor.%0A%0AType%20of%20video%3A%0ARaw%20footage%20length%3A%0ATarget%20final%20length%3A%0ADeadline%3A%0AReference%20style%3A%0ABudget%3A`;
+const tickerItems = [
+  "Minecraft editing",
+  "Shorts hooks",
+  "Long-form pacing",
+  "SFX and music",
+  "4K exports",
+  "Replay shots",
+  "Clear workflow",
+];
 
 const videos: PortfolioVideo[] = [
   {
@@ -106,6 +119,7 @@ function App() {
   const [activeVideo, setActiveVideo] = useState<PortfolioVideo | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [portfolioExpanded, setPortfolioExpanded] = useState(false);
+  const [toastVisible, setToastVisible] = useState(false);
 
   const filteredVideos = useMemo(
     () => (filter === "all" ? videos : videos.filter((video) => video.type === filter)),
@@ -162,6 +176,21 @@ function App() {
   }, []);
 
   useEffect(() => {
+    let toastTimer = 0;
+    const showToast = () => {
+      window.clearTimeout(toastTimer);
+      setToastVisible(true);
+      toastTimer = window.setTimeout(() => setToastVisible(false), 3000);
+    };
+
+    window.addEventListener("email-copied", showToast);
+    return () => {
+      window.clearTimeout(toastTimer);
+      window.removeEventListener("email-copied", showToast);
+    };
+  }, []);
+
+  useEffect(() => {
     setPortfolioExpanded(false);
   }, [filter]);
 
@@ -180,11 +209,17 @@ function App() {
       <div className="scroll-timeline" aria-hidden="true">
         <span />
       </div>
+      <div className={toastVisible ? "toast show" : "toast"} role="status" aria-live="polite">
+        Email copied
+      </div>
 
       <header className="site-header">
-        <a className="brand" href="#top" onClick={() => setMenuOpen(false)}>
-          <span className="brand-mark">CH</span>
-          <span>Carlos Henrique</span>
+        <a className="ticker" href="#top" onClick={() => setMenuOpen(false)} aria-label="Back to top">
+          <span>
+            {[...tickerItems, ...tickerItems].map((item, index) => (
+              <React.Fragment key={`${item}-${index}`}>{item} <b>•</b> </React.Fragment>
+            ))}
+          </span>
         </a>
 
         <nav className={menuOpen ? "nav-links open" : "nav-links"} aria-label="Main navigation">
@@ -195,10 +230,10 @@ function App() {
           ))}
         </nav>
 
-        <a className="header-cta" href={mailto}>
+        <EmailCopyButton className="header-cta">
           <Mail size={16} />
           <span>Hire me</span>
-        </a>
+        </EmailCopyButton>
 
         <button className="icon-button menu-button" type="button" onClick={() => setMenuOpen((value) => !value)} aria-label="Open menu">
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -216,10 +251,10 @@ function App() {
                 I help YouTubers and Twitch streamers turn raw gameplay into faster, cleaner, more watchable videos with hooks, pacing, SFX, captions, music, and lightweight motion.
               </p>
               <div className="hero-actions">
-                <a className="button primary" href={mailto}>
+                <EmailCopyButton className="button primary">
                   Get rates
                   <ChevronRight size={18} />
-                </a>
+                </EmailCopyButton>
                 <a className="button secondary" href="#work">
                   See portfolio
                   <Film size={18} />
@@ -252,25 +287,17 @@ function App() {
 
         <section className="section clients-section" id="clients" data-theme="craft">
           <div className="wrap">
-            <SectionHead kicker="Clients & styles" title="Creators, formats, and edit languages I am building around.">
-              A compact place for social proof now, with room to add real client images and results later.
-            </SectionHead>
+            <SectionHead kicker="Clients" title="Pessoas que confiam no meu trabalho" />
             <div className="clients-row" data-reveal>
-              <ClientSpotlight title="WiredLP" note="Minecraft creator" href="https://www.youtube.com/@WiredLP" />
-              <ClientSpotlight title="Shorts" note="fast hooks" href="#work" />
-              <ClientSpotlight title="Long-form" note="story pacing" href="#work" />
-              <ClientSpotlight title="Twitch" note="stream moments" href="#work" />
-              <ClientSpotlight title="Survival / HC" note="main focus" href="#work" />
+              <ClientSpotlight title="WiredLP" note="35.5K subscribers" href="https://www.youtube.com/@WiredLP" image={wiredProfile} />
             </div>
           </div>
         </section>
 
         <section className="section" id="about" data-theme="craft">
           <div className="wrap">
-            <SectionHead kicker="Focused, not generic" title="For creators who would rather record than edit.">
-              You focus on recording the content. I handle the structure, cuts, captions when useful, audio treatment, SFX, music, zooms, and polish.
-            </SectionHead>
-            <div className="feature-grid">
+            <SectionHead kicker="Focused, not generic" title="For creators who would rather record than edit." />
+            <div className="feature-grid about-grid">
               <InfoCard title="What I like editing">
                 Funny or educational Minecraft videos with that classic YouTube energy: hardcore, survival, gameplay challenges, farms, builds, tutorials, fun facts, and talking-head formats.
               </InfoCard>
@@ -287,11 +314,11 @@ function App() {
               Editing, motion, graphics, cinematic Minecraft shots, and replay control in one workflow.
             </SectionHead>
             <div className="tools-grid">
-              <ToolCard code="Pr" title="Premiere Pro 2026" />
-              <ToolCard code="Ae" title="After Effects 2026" />
-              <ToolCard code="Ai" title="Illustrator 2026" />
-              <ToolCard code="RM" title="Replay Mod" />
-              <ToolCard code="FB" title="Flashback Mod" />
+              <ToolCard image={premiereLogo} title="Premiere Pro 2026" />
+              <ToolCard image={afterEffectsLogo} title="After Effects 2026" />
+              <ToolCard image={illustratorLogo} title="Illustrator 2026" />
+              <ToolCard image={replayModLogo} title="Replay Mod" />
+              <ToolCard image={flashbackLogo} title="Flashback Mod" />
             </div>
           </div>
         </section>
@@ -438,10 +465,10 @@ function App() {
                 <h3>Start here</h3>
                 <p>Email is the best place to send project details. Discord is best for quick conversation after the first contact.</p>
                 <div className="hero-actions">
-                  <a className="button primary" href={mailto}>
+                  <EmailCopyButton className="button primary">
                     Email me
                     <Mail size={18} />
-                  </a>
+                  </EmailCopyButton>
                   <a className="button secondary" href="https://ytjobs.co/talent/profile/563084" target="_blank" rel="noreferrer">
                     View YTJobs
                     <ArrowUpRight size={18} />
@@ -464,7 +491,7 @@ function App() {
 
       <footer className="footer">
         <span>Copyright {new Date().getFullYear()} Carlos Henrique - Minecraft Video Editor.</span>
-        <span>Focused edits for YouTube & Twitch creators.</span>
+        <a href="#top">Back to top</a>
       </footer>
 
       {activeVideo && <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />}
@@ -479,6 +506,63 @@ function SectionHead({ kicker, title, children }: { kicker: string; title: strin
       <h2>{title}</h2>
       {children && <p>{children}</p>}
     </div>
+  );
+}
+
+async function copyEmail() {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(email);
+    } else {
+      const textarea = document.createElement("textarea");
+      textarea.value = email;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      textarea.remove();
+    }
+  } finally {
+    playCopySound();
+    window.dispatchEvent(new CustomEvent("email-copied"));
+  }
+}
+
+function playCopySound() {
+  try {
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as unknown as { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    if (!AudioContextClass) return;
+
+    const context = new AudioContextClass();
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(660, context.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(990, context.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.0001, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.08, context.currentTime + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.18);
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.2);
+    window.setTimeout(() => void context.close(), 260);
+  } catch {
+    // Audio feedback is nice to have, but clipboard feedback should never depend on it.
+  }
+}
+
+function EmailCopyButton({ className, children }: { className: string; children: React.ReactNode }) {
+  return (
+    <button className={className} type="button" onClick={() => void copyEmail()}>
+      {children}
+    </button>
   );
 }
 
@@ -500,20 +584,24 @@ function InfoCard({ title, children }: { title: string; children: React.ReactNod
   );
 }
 
-function ClientSpotlight({ title, note, href }: { title: string; note: string; href: string }) {
+function ClientSpotlight({ title, note, href, image }: { title: string; note: string; href: string; image: string }) {
   return (
     <a className="client-spotlight" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>
-      <span className="client-orb">{title.slice(0, 2)}</span>
+      <span className="client-orb">
+        <img src={image} alt="" />
+      </span>
       <strong>{title}</strong>
       <small>{note}</small>
     </a>
   );
 }
 
-function ToolCard({ code, title }: { code: string; title: string }) {
+function ToolCard({ image, title }: { image: string; title: string }) {
   return (
     <article className="tool-card" data-reveal>
-      <span className={`tool-logo ${code.toLowerCase()}`}>{code}</span>
+      <span className="tool-logo">
+        <img src={image} alt="" />
+      </span>
       <strong>{title}</strong>
     </article>
   );
@@ -556,15 +644,30 @@ function InlineCta({ text, cta }: { text: string; cta: string }) {
   return (
     <div className="inline-cta" data-reveal>
       <p>{text}</p>
-      <a className="button primary" href={mailto}>
+      <EmailCopyButton className="button primary">
         {cta}
         <ChevronRight size={18} />
-      </a>
+      </EmailCopyButton>
     </div>
   );
 }
 
 function SocialLink({ icon, label, value, href }: { icon: React.ReactNode; label: string; value: string; href: string }) {
+  const isEmail = href.startsWith("mailto:");
+
+  if (isEmail) {
+    return (
+      <button className="social-link" type="button" onClick={() => void copyEmail()}>
+        <span className="social-icon">{icon}</span>
+        <span>
+          <strong>{label}</strong>
+          <small>{value}</small>
+        </span>
+        <ArrowUpRight size={17} />
+      </button>
+    );
+  }
+
   return (
     <a className="social-link" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>
       <span className="social-icon">{icon}</span>
@@ -600,12 +703,19 @@ function VideoModal({ video, onClose }: { video: PortfolioVideo; onClose: () => 
           </button>
         </div>
         <div className="player">
+          <div className="player-frame-label">
+            <span />
+            Hosted on YouTube
+          </div>
           <iframe
             title={video.title}
             src={`https://www.youtube-nocookie.com/embed/${video.id}?autoplay=1&rel=0&modestbranding=1`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
+          <div className="player-rail" aria-hidden="true">
+            <span />
+          </div>
         </div>
       </div>
     </div>
