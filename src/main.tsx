@@ -59,6 +59,17 @@ const timelineClips = [
   { color: "#ff5722", start: 0.9, end: 1 },
 ];
 
+const timelineMarkers = [
+  { top: 4, label: "IN", color: "#d3d93b", side: "left" },
+  { top: 14, label: "SFX", color: "#2196f3", side: "right" },
+  { top: 27, label: "CUT", color: "#f28705", side: "left" },
+  { top: 39, label: "FX", color: "#9c27b0", side: "right" },
+  { top: 52, label: "VO", color: "#f2226e", side: "left" },
+  { top: 64, label: "B", color: "#8bc34a", side: "right" },
+  { top: 76, label: "MIX", color: "#019688", side: "left" },
+  { top: 91, label: "OUT", color: "#ff5722", side: "right" },
+];
+
 const videos: PortfolioVideo[] = [
   {
     id: "4uCf080MwRM",
@@ -243,6 +254,20 @@ function App() {
               } as React.CSSProperties
             }
           />
+        ))}
+        {timelineMarkers.map((marker) => (
+          <span
+            className={`timeline-marker ${marker.side}`}
+            key={`${marker.label}-${marker.top}`}
+            style={
+              {
+                "--marker-top": `${marker.top}%`,
+                "--marker-color": marker.color,
+              } as React.CSSProperties
+            }
+          >
+            {marker.label}
+          </span>
         ))}
       </div>
       <div className={toastVisible ? "toast show" : "toast"} role="status" aria-live="polite">

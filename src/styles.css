@@ -168,6 +168,51 @@ img {
   transition: transform 120ms linear;
 }
 
+.timeline-marker {
+  position: absolute;
+  top: var(--marker-top);
+  z-index: 2;
+  display: grid;
+  min-width: 30px;
+  height: 16px;
+  place-items: center;
+  border: 1px solid rgba(5, 7, 11, 0.55);
+  border-radius: 2px;
+  background: var(--marker-color);
+  color: #10131c;
+  font-size: 8px;
+  font-weight: 950;
+  line-height: 1;
+  transform: translateY(-50%);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.24);
+}
+
+.timeline-marker::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 2px;
+  background: var(--marker-color);
+  transform: translateY(-50%);
+}
+
+.timeline-marker.left {
+  right: calc(100% + 6px);
+}
+
+.timeline-marker.left::before {
+  right: -7px;
+}
+
+.timeline-marker.right {
+  left: calc(100% + 6px);
+}
+
+.timeline-marker.right::before {
+  left: -7px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
