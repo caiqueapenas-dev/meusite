@@ -189,6 +189,12 @@ function App() {
           const localProgress = Math.min(1, Math.max(0, (clampedProgress - start) / (end - start)));
           clip.style.setProperty("--clip-progress", `${localProgress}`);
         });
+
+        document.querySelectorAll<HTMLElement>("[data-timeline-marker]").forEach((marker) => {
+          const top = Number(marker.dataset.top) / 100;
+          const isVisible = clampedProgress >= top ? 1 : 0;
+          marker.style.setProperty("--marker-visible", `${isVisible}`);
+        });
       });
     };
 
@@ -258,6 +264,8 @@ function App() {
         {timelineMarkers.map((marker) => (
           <span
             className={`timeline-marker ${marker.side}`}
+            data-timeline-marker
+            data-top={marker.top}
             key={`${marker.label}-${marker.top}`}
             style={
               {
