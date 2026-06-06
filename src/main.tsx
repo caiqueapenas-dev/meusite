@@ -46,6 +46,19 @@ const tickerItems = [
   "Clear workflow",
 ];
 
+const timelineClips = [
+  { color: "#f2226e", start: 0, end: 0.05 },
+  { color: "#2196f3", start: 0.05, end: 0.12 },
+  { color: "#9c27b0", start: 0.12, end: 0.21 },
+  { color: "#d3d93b", start: 0.21, end: 0.31 },
+  { color: "#f28705", start: 0.31, end: 0.43 },
+  { color: "#f44336", start: 0.43, end: 0.55 },
+  { color: "#673ab7", start: 0.55, end: 0.67 },
+  { color: "#8bc34a", start: 0.67, end: 0.78 },
+  { color: "#019688", start: 0.78, end: 0.9 },
+  { color: "#ff5722", start: 0.9, end: 1 },
+];
+
 const videos: PortfolioVideo[] = [
   {
     id: "4uCf080MwRM",
@@ -156,7 +169,15 @@ function App() {
       scrollFrame = window.requestAnimationFrame(() => {
         const height = document.documentElement.scrollHeight - window.innerHeight;
         const progress = height > 0 ? window.scrollY / height : 0;
-        document.documentElement.style.setProperty("--scroll", `${Math.min(1, Math.max(0, progress))}`);
+        const clampedProgress = Math.min(1, Math.max(0, progress));
+        document.documentElement.style.setProperty("--scroll", `${clampedProgress}`);
+
+        document.querySelectorAll<HTMLElement>("[data-timeline-clip]").forEach((clip) => {
+          const start = Number(clip.dataset.start);
+          const end = Number(clip.dataset.end);
+          const localProgress = Math.min(1, Math.max(0, (clampedProgress - start) / (end - start)));
+          clip.style.setProperty("--clip-progress", `${localProgress}`);
+        });
       });
     };
 
@@ -207,7 +228,22 @@ function App() {
         <div className="grid-glow" />
       </div>
       <div className="scroll-timeline" aria-hidden="true">
-        <span />
+        {timelineClips.map((clip) => (
+          <span
+            className="timeline-clip"
+            data-timeline-clip
+            data-start={clip.start}
+            data-end={clip.end}
+            key={`${clip.color}-${clip.start}`}
+            style={
+              {
+                "--clip-color": clip.color,
+                "--clip-start": `${clip.start * 100}%`,
+                "--clip-size": `${(clip.end - clip.start) * 100}%`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
       </div>
       <div className={toastVisible ? "toast show" : "toast"} role="status" aria-live="polite">
         Email copied
