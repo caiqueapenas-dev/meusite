@@ -352,7 +352,7 @@ function App() {
 
         <section className="section clients-section" id="clients" data-theme="craft">
           <div className="wrap">
-            <SectionHead kicker="Clients" title="Pessoas que confiam no meu trabalho" />
+            <SectionHead kicker="Clients" title="Creators who trust my work" />
             <div className="clients-row" data-reveal>
               <ClientSpotlight title="WiredLP" note="35.5K subscribers" href="https://www.youtube.com/@WiredLP" image={wiredProfile} />
             </div>

@@ -1,0 +1,1263 @@
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(31, 33, 48, .72);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+      font-weight: 800;
+      letter-spacing: -.03em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      box-shadow: 0 12px 28px rgba(189, 147, 249, .26);
+      color: #151722;
+      font-weight: 950;
+    }
+
+    .brand span:last-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .nav-cta {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(80, 250, 123, .12);
+      color: var(--green);
+      border: 1px solid rgba(80, 250, 123, .25);
+      font-weight: 750;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .hero {
+      padding: 54px 0 32px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border: 1px solid rgba(139, 233, 253, .22);
+      color: var(--cyan);
+      background: rgba(139, 233, 253, .08);
+      border-radius: 999px;
+      font-weight: 760;
+      font-size: 13px;
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--green);
+      box-shadow: 0 0 0 7px rgba(80, 250, 123, .11);
+    }
+
+    h1, h2, h3, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(42px, 12vw, 86px);
+      line-height: .93;
+      letter-spacing: -.075em;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--text), var(--cyan), var(--purple), var(--pink));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 64ch;
+    }
+
+    .hero-actions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .btn {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-weight: 820;
+      border: 1px solid transparent;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .btn:active { transform: scale(.98); }
+
+    .btn-primary {
+      color: #151722;
+      background: linear-gradient(135deg, var(--green), var(--cyan));
+      box-shadow: 0 18px 44px rgba(80, 250, 123, .18);
+    }
+
+    .btn-secondary {
+      color: var(--text);
+      background: rgba(248, 248, 242, .055);
+      border-color: var(--border);
+    }
+
+    .hero-card {
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .025)),
+        var(--card);
+      border-radius: var(--radius-xl);
+      padding: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      right: -56px;
+      top: -56px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 121, 198, .28), transparent 68%);
+    }
+
+    .terminal {
+      position: relative;
+      background: #191b28;
+      border: 1px solid rgba(248, 248, 242, .08);
+      border-radius: 22px;
+      overflow: hidden;
+    }
+
+    .terminal-top {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding-inline: 14px;
+      border-bottom: 1px solid rgba(248, 248, 242, .08);
+      background: rgba(255, 255, 255, .035);
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.red { background: var(--red); }
+    .dot.yellow { background: var(--yellow); }
+    .dot.green { background: var(--green); }
+
+    .terminal-body {
+      padding: 18px;
+    }
+
+    .metric-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(248, 248, 242, .055);
+      border: 1px solid rgba(248, 248, 242, .075);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+      letter-spacing: -.04em;
+    }
+
+    .metric span {
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .code-line {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .code-line b { color: var(--green); font-weight: 800; }
+
+    section {
+      padding: 42px 0;
+    }
+
+    .section-head {
+      margin-bottom: 22px;
+    }
+
+    .kicker {
+      margin-bottom: 8px;
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    h2 {
+      font-size: clamp(30px, 8vw, 56px);
+      line-height: 1;
+      letter-spacing: -.065em;
+      margin-bottom: 12px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 68ch;
+    }
+
+    .story-grid,
+    .deliverables-grid,
+    .pricing-grid,
+    .contact-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(48, 50, 65, .74);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: 0 16px 42px rgba(0,0,0,.16);
+    }
+
+    .card h3 {
+      margin-bottom: 8px;
+      letter-spacing: -.035em;
+      line-height: 1.08;
+    }
+
+    .card p {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      color: var(--muted);
+      background: rgba(248, 248, 242, .06);
+      border: 1px solid rgba(248, 248, 242, .08);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .spotlight-scroll {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 4px 0 12px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .spotlight-scroll::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .spotlight-scroll::-webkit-scrollbar-thumb {
+      background: rgba(248, 248, 242, .15);
+      border-radius: 999px;
+    }
+
+    .spotlight {
+      scroll-snap-align: start;
+      min-width: 108px;
+      text-align: center;
+    }
+
+    .circle {
+      width: 92px;
+      height: 92px;
+      margin-inline: auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--green), var(--cyan), var(--purple), var(--pink));
+      box-shadow: 0 16px 36px rgba(0,0,0,.22);
+    }
+
+    .circle-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      display: grid;
+      place-items: center;
+      background: #191b28;
+      color: var(--text);
+      font-weight: 900;
+      font-size: 15px;
+      line-height: 1.05;
+      padding: 10px;
+    }
+
+    .spotlight strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .spotlight span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted-2);
+      font-size: 12px;
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .filter-btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: rgba(248, 248, 242, .055);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .filter-btn.active {
+      color: #151722;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+    }
+
+    .portfolio-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .video-card {
+      display: grid;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: rgba(48, 50, 65, .74);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .video-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(189, 147, 249, .45);
+    }
+
+    .thumb {
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(135deg, rgba(80, 250, 123, .16), rgba(139, 233, 253, .10)),
+        #191b28;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+
+    .thumb::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 121, 198, .22), transparent 20%),
+        radial-gradient(circle at 80% 80%, rgba(189, 147, 249, .24), transparent 24%);
+    }
+
+    .play {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(248, 248, 242, .95);
+      color: #151722;
+      font-weight: 950;
+      box-shadow: 0 18px 46px rgba(0,0,0,.3);
+    }
+
+    .play::after {
+      content: "▶";
+      margin-left: 4px;
+    }
+
+    .video-body {
+      padding: 18px;
+    }
+
+    .video-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .pill {
+      width: fit-content;
+      color: var(--cyan);
+      background: rgba(139, 233, 253, .09);
+      border: 1px solid rgba(139, 233, 253, .19);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .video-card h3 {
+      margin-bottom: 7px;
+      letter-spacing: -.035em;
+    }
+
+    .video-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .deliverable {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .icon {
+      flex: 0 0 auto;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(80, 250, 123, .11);
+      color: var(--green);
+      border: 1px solid rgba(80, 250, 123, .2);
+      font-weight: 950;
+    }
+
+    .pricing-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(80, 250, 123, .35);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(80, 250, 123, .11), transparent 18rem),
+        rgba(48, 50, 65, .86);
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 18px 0 14px;
+    }
+
+    .price strong {
+      font-size: 42px;
+      letter-spacing: -.065em;
+      line-height: 1;
+    }
+
+    .price span {
+      color: var(--muted-2);
+      font-weight: 750;
+    }
+
+    .list {
+      display: grid;
+      gap: 9px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list li {
+      color: var(--muted);
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+    }
+
+    .list li::before {
+      content: "✓";
+      color: var(--green);
+      font-weight: 950;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: var(--muted-2);
+      font-size: 13px;
+    }
+
+    .process {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      counter-increment: step;
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: rgba(248, 248, 242, .045);
+    }
+
+    .step::before {
+      content: "0" counter(step);
+      display: inline-flex;
+      margin-bottom: 10px;
+      color: var(--green);
+      font-weight: 950;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .step h3 {
+      margin-bottom: 6px;
+      letter-spacing: -.03em;
+    }
+
+    .step p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .faq {
+      display: grid;
+      gap: 10px;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(48, 50, 65, .7);
+      overflow: hidden;
+    }
+
+    summary {
+      cursor: pointer;
+      padding: 16px;
+      font-weight: 850;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      color: var(--green);
+      font-size: 20px;
+      line-height: 1;
+    }
+
+    details[open] summary::after {
+      content: "–";
+    }
+
+    details p {
+      padding: 0 16px 16px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .contact-card {
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(248, 248, 242, .05);
+      border: 1px solid rgba(248, 248, 242, .075);
+      color: var(--muted);
+      font-weight: 760;
+    }
+
+    .contact-link strong {
+      color: var(--text);
+    }
+
+    .contact-link span {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .footer {
+      padding: 28px 0 36px;
+      border-top: 1px solid var(--border);
+      color: var(--muted-2);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: grid;
+      gap: 10px;
+    }
+
+    .hide {
+      display: none !important;
+    }
+
+    @media (min-width: 560px) {
+      .hero-actions {
+        grid-template-columns: auto auto;
+        justify-content: start;
+      }
+
+      .metric-grid,
+      .portfolio-grid,
+      .deliverables-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 800px) {
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 750;
+      }
+
+      .hero {
+        padding: 86px 0 46px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1.1fr .9fr;
+        align-items: center;
+      }
+
+      .story-grid,
+      .pricing-grid,
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-inner {
+        grid-template-columns: 1fr auto;
+        align-items: center;
+      }
+
+      section {
+        padding: 62px 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="Carlos Henrique home">
+        <span class="brand-mark">CH</span>
+        <span>Carlos Henrique</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#work">Work</a>
+        <a href="#deliverables">Deliverables</a>
+        <a href="#rates">Rates</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <a class="nav-cta" href="mailto:editor.carloshenrique@gmail.com?subject=Editing%20rates%20inquiry">Consult rates</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow"><span class="pulse"></span> Minecraft-only video editor</div>
+          <h1>Edits built for <span class="gradient-text">Minecraft creators</span>.</h1>
+          <p class="hero-copy">
+            I help YouTubers and Twitch streamers turn raw gameplay into faster, cleaner, more watchable videos —
+            with storytelling-focused pacing, hooks, SFX, captions, music, and lightweight motion.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:editor.carloshenrique@gmail.com?subject=Minecraft%20editing%20rates&body=Hey%20Carlos%2C%20I%27d%20like%20to%20ask%20about%20your%20editing%20rates.%0A%0AType%20of%20video%3A%0ARaw%20footage%20length%3A%0ADeadline%3A%0AReference%20style%3A">Get rates</a>
+            <a class="btn btn-secondary" href="#work">See portfolio</a>
+          </div>
+
+          <div class="tag-row" aria-label="Editing niches">
+            <span class="tag">Hardcore</span>
+            <span class="tag">Survival</span>
+            <span class="tag">Super-farms</span>
+            <span class="tag">Tutorials</span>
+            <span class="tag">Twitch clips</span>
+            <span class="tag">Up to 4K</span>
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Quick editing stats">
+          <div class="terminal">
+            <div class="terminal-top">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <div class="terminal-body">
+              <div class="metric-grid">
+                <div class="metric">
+                  <strong>2 days</strong>
+                  <span>average short turnaround</span>
+                </div>
+                <div class="metric">
+                  <strong>5 days</strong>
+                  <span>average long-form turnaround</span>
+                </div>
+                <div class="metric">
+                  <strong>4K</strong>
+                  <span>editing and export available</span>
+                </div>
+                <div class="metric">
+                  <strong>∞</strong>
+                  <span>revisions with common sense</span>
+                </div>
+              </div>
+              <p class="code-line"><b>$</b> raw_gameplay → hook → pacing → story → final_export.mp4</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Focused, not generic</p>
+          <h2>For creators who would rather record than edit.</h2>
+          <p>
+            You focus on recording the content. I handle the cuts, pacing, captions when needed, audio treatment,
+            SFX, music, basic motion, zooms, and polish — so the video feels easier to watch and easier to finish.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <article class="card">
+            <h3>What I like editing</h3>
+            <p>
+              Funny or educational Minecraft videos with that old-school YouTube feeling. I’m especially interested in
+              hardcore, survival, gameplay challenges, farms, builds, tutorials, fun facts, and talking-head formats.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Who it’s ideal for</h3>
+            <p>
+              YouTubers and Twitch streamers up to around 150K subscribers who want a reliable editor, clear communication,
+              and a style that matches Minecraft instead of a random “one-size-fits-all” edit.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="clients">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Social proof</p>
+          <h2>Clients & editing styles</h2>
+          <p>
+            Starting focused and growing intentionally. More client circles can be added here as the portfolio expands.
+          </p>
+        </div>
+
+        <div class="spotlight-scroll" aria-label="Clients and editing styles">
+          <a class="spotlight" href="https://www.youtube.com/@WiredLP" target="_blank" rel="noopener">
+            <span class="circle"><span class="circle-inner">Wired<br>LP</span></span>
+            <strong>WiredLP</strong>
+            <span>35.5K subscribers</span>
+          </a>
+          <a class="spotlight" href="#work">
+            <span class="circle"><span class="circle-inner">Shorts</span></span>
+            <strong>Viral Shorts</strong>
+            <span>fast hooks</span>
+          </a>
+          <a class="spotlight" href="#work">
+            <span class="circle"><span class="circle-inner">Long</span></span>
+            <strong>Long Format</strong>
+            <span>story pacing</span>
+          </a>
+          <a class="spotlight" href="#work">
+            <span class="circle"><span class="circle-inner">Twitch</span></span>
+            <strong>Stream Clips</strong>
+            <span>context edits</span>
+          </a>
+          <a class="spotlight" href="#work">
+            <span class="circle"><span class="circle-inner">MC</span></span>
+            <strong>Survival / HC</strong>
+            <span>my main focus</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">See for yourself</p>
+          <h2>Portfolio</h2>
+          <p>
+            Replace the placeholder links with your real YouTube videos. Keep each project title short and the description even shorter.
+          </p>
+        </div>
+
+        <div class="filters" aria-label="Portfolio filters">
+          <button class="filter-btn active" type="button" data-filter="all">All</button>
+          <button class="filter-btn" type="button" data-filter="shorts">Viral shorts</button>
+          <button class="filter-btn" type="button" data-filter="long">Long format</button>
+        </div>
+
+        <div class="portfolio-grid">
+          <a class="video-card" data-type="shorts" href="https://www.youtube.com/@carlosvideoeditor/shorts" target="_blank" rel="noopener">
+            <div class="thumb" aria-hidden="true"><span class="play"></span></div>
+            <div class="video-body">
+              <div class="video-meta"><span class="pill">Viral short</span></div>
+              <h3>Fast Minecraft Hook</h3>
+              <p>Quick setup, tighter pacing, subtitles, SFX, and zooms to keep the viewer watching.</p>
+            </div>
+          </a>
+
+          <a class="video-card" data-type="shorts" href="https://www.youtube.com/@carlosvideoeditor/shorts" target="_blank" rel="noopener">
+            <div class="thumb" aria-hidden="true"><span class="play"></span></div>
+            <div class="video-body">
+              <div class="video-meta"><span class="pill">Viral short</span></div>
+              <h3>Twitch Clip to Short</h3>
+              <p>A stream moment shaped into a short with added context and cleaner comedic timing.</p>
+            </div>
+          </a>
+
+          <a class="video-card" data-type="shorts" href="https://www.youtube.com/@carlosvideoeditor/shorts" target="_blank" rel="noopener">
+            <div class="thumb" aria-hidden="true"><span class="play"></span></div>
+            <div class="video-body">
+              <div class="video-meta"><span class="pill">Viral short</span></div>
+              <h3>Build / Reveal Edit</h3>
+              <p>Simple progression, music, impact beats, and motion to make the reveal feel bigger.</p>
+            </div>
+          </a>
+
+          <a class="video-card" data-type="long" href="https://www.youtube.com/@carlosvideoeditor/videos" target="_blank" rel="noopener">
+            <div class="thumb" aria-hidden="true"><span class="play"></span></div>
+            <div class="video-body">
+              <div class="video-meta"><span class="pill">Long format</span></div>
+              <h3>Survival Episode</h3>
+              <p>Raw gameplay shaped into a watchable story with clean cuts and retention-focused pacing.</p>
+            </div>
+          </a>
+
+          <a class="video-card" data-type="long" href="https://www.youtube.com/@carlosvideoeditor/videos" target="_blank" rel="noopener">
+            <div class="thumb" aria-hidden="true"><span class="play"></span></div>
+            <div class="video-body">
+              <div class="video-meta"><span class="pill">Long format</span></div>
+              <h3>Farm / Tutorial Video</h3>
+              <p>Educational flow with fewer dead moments, clearer steps, and smoother audio.</p>
+            </div>
+          </a>
+
+          <a class="video-card" data-type="long" href="https://www.youtube.com/@carlosvideoeditor/videos" target="_blank" rel="noopener">
+            <div class="thumb" aria-hidden="true"><span class="play"></span></div>
+            <div class="video-body">
+              <div class="video-meta"><span class="pill">Long format</span></div>
+              <h3>Challenge / Story Video</h3>
+              <p>Focused structure, hooks between sections, music shifts, SFX, and basic 3D support.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="deliverables">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">What you receive</p>
+          <h2>Everything needed for a clean Minecraft edit.</h2>
+          <p>
+            The exact scope depends on the footage and complexity, but these are the core deliverables included in the starting packages.
+          </p>
+        </div>
+
+        <div class="deliverables-grid">
+          <article class="card deliverable">
+            <span class="icon">✂</span>
+            <div>
+              <h3>Cutting & decoupage</h3>
+              <p>Removing dead moments and organizing the footage into a clear flow.</p>
+            </div>
+          </article>
+
+          <article class="card deliverable">
+            <span class="icon">↯</span>
+            <div>
+              <h3>Story-focused pacing</h3>
+              <p>Hooks, rhythm, and section flow designed to keep the audience engaged.</p>
+            </div>
+          </article>
+
+          <article class="card deliverable">
+            <span class="icon">T</span>
+            <div>
+              <h3>Captions when needed</h3>
+              <p>Readable subtitles and text callouts where they actually help the video.</p>
+            </div>
+          </article>
+
+          <article class="card deliverable">
+            <span class="icon">＋</span>
+            <div>
+              <h3>Basic motion</h3>
+              <p>Text, elements, zoom-ins, zoom-outs, and motion accents for key moments.</p>
+            </div>
+          </article>
+
+          <article class="card deliverable">
+            <span class="icon">♪</span>
+            <div>
+              <h3>Audio, SFX & music</h3>
+              <p>Cleaner audio treatment, sound effects, and music matching the video’s vibe.</p>
+            </div>
+          </article>
+
+          <article class="card deliverable">
+            <span class="icon">▣</span>
+            <div>
+              <h3>Basic 3D manipulation</h3>
+              <p>Light 3D support when the idea needs a more cinematic Minecraft feel.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="rates">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Starting rates</p>
+          <h2>Simple entry packages.</h2>
+          <p>
+            These are starting prices. More complex videos, heavy VFX, large raw footage, tight deadlines, or custom formats may need a custom quote.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="card pricing-card featured">
+            <h3>Shorts</h3>
+            <p>For YouTube Shorts, TikTok, Reels, and Twitch moments turned into vertical content.</p>
+            <div class="price">
+              <strong>$60</strong>
+              <span>USD / video</span>
+            </div>
+            <ul class="list">
+              <li>Up to 60 seconds</li>
+              <li>Hook-focused pacing</li>
+              <li>Captions if applicable</li>
+              <li>SFX, music, zooms, and text motion</li>
+              <li>Average delivery: around 2 days</li>
+            </ul>
+          </article>
+
+          <article class="card pricing-card">
+            <h3>Long-form</h3>
+            <p>For Minecraft YouTube videos up to 20 minutes, including gameplay, tutorials, farms, and survival.</p>
+            <div class="price">
+              <strong>$200</strong>
+              <span>USD / video</span>
+            </div>
+            <ul class="list">
+              <li>Up to 20 minutes final length</li>
+              <li>Storytelling-focused cuts</li>
+              <li>Audio treatment, SFX, and music</li>
+              <li>Basic motion and light 3D when needed</li>
+              <li>Average delivery: around 5 days</li>
+            </ul>
+          </article>
+        </div>
+
+        <p class="note">
+          Revisions are unlimited with the goal of making sure you are happy with the final video. To protect deadlines,
+          revisions should be requested with common sense and clear feedback.
+        </p>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Workflow</p>
+          <h2>Clear, simple, remote-friendly.</h2>
+        </div>
+
+        <div class="process">
+          <article class="step">
+            <h3>Send footage</h3>
+            <p>You share the raw files, references, notes, and deadline.</p>
+          </article>
+          <article class="step">
+            <h3>I edit</h3>
+            <p>I handle structure, pacing, audio, captions, SFX, and polish.</p>
+          </article>
+          <article class="step">
+            <h3>You review</h3>
+            <p>You send notes. I adjust until the video feels right.</p>
+          </article>
+          <article class="step">
+            <h3>Final delivery</h3>
+            <p>Delivered your preferred way, or through a shared Google Drive folder.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="payments">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Payments</p>
+          <h2>Easy payment options for international clients.</h2>
+        </div>
+
+        <div class="story-grid">
+          <article class="card">
+            <h3>Accepted methods</h3>
+            <p>
+              PayPal, Wise, and international bank transfer to Brazil are available. Wise is usually the smoothest option
+              for USD payments and international transfers.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Bank transfer to Brazil</h3>
+            <p>
+              If you prefer a direct transfer, I can provide the required beneficiary details. Transfer fees, exchange rates,
+              and processing times depend on your bank or transfer provider, so we confirm everything before starting.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">FAQ</p>
+          <h2>Questions creators usually ask.</h2>
+        </div>
+
+        <div class="faq">
+          <details>
+            <summary>Do you only edit Minecraft videos?</summary>
+            <p>Yes. My focus is Minecraft content, including YouTube videos, Shorts, and Twitch clips. That focus helps me understand the pacing, humor, gameplay context, and viewer expectations better.</p>
+          </details>
+
+          <details>
+            <summary>What kind of creators are the best fit?</summary>
+            <p>YouTubers and Twitch streamers who create gameplay, tutorials, farms, survival, hardcore, fun facts, challenges, or talking-head Minecraft content — especially creators who want to record more and edit less.</p>
+          </details>
+
+          <details>
+            <summary>How fast can you deliver?</summary>
+            <p>It depends on complexity, but the average is around 2 days for Shorts and around 5 days for long-form videos. Tight deadlines can be discussed before the project starts.</p>
+          </details>
+
+          <details>
+            <summary>Do you do revisions?</summary>
+            <p>Yes. Revisions are unlimited with the goal of making sure you are satisfied. The only note is that feedback should be clear and reasonable so we can protect the deadline.</p>
+          </details>
+
+          <details>
+            <summary>How do you deliver the final files?</summary>
+            <p>Delivery can happen however you prefer. If you do not have a preference, I deliver through a shared Google Drive folder.</p>
+          </details>
+
+          <details>
+            <summary>Can you edit Twitch streams into Shorts?</summary>
+            <p>Yes. I can take a stream moment and turn it into a cleaner vertical short, adding context when needed so the clip makes sense even to viewers who did not watch the full stream.</p>
+          </details>
+
+          <details>
+            <summary>Can you handle 4K footage?</summary>
+            <p>Yes. I can edit and export up to 4K, depending on the project requirements and the files provided.</p>
+          </details>
+
+          <details>
+            <summary>What do you need to quote a project?</summary>
+            <p>Send the type of video, raw footage length, target final length, deadline, reference style, and any must-have moments. I can then confirm the rate and turnaround.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Contact</p>
+          <h2>Want to stop editing and start recording more?</h2>
+          <p>
+            Send me your footage type, deadline, and a reference video. I’ll reply with the best rate for your project.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <article class="card">
+            <h3>Start here</h3>
+            <p>Email is the best place to send project details. Discord is best for quick conversation after the first contact.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="mailto:editor.carloshenrique@gmail.com?subject=Minecraft%20editing%20project&body=Hey%20Carlos%2C%20I%27m%20looking%20for%20a%20Minecraft%20video%20editor.%0A%0AType%20of%20video%3A%0ARaw%20footage%20length%3A%0ATarget%20final%20length%3A%0ADeadline%3A%0AReference%20style%3A%0ABudget%3A">Email me</a>
+              <a class="btn btn-secondary" href="https://ytjobs.co/talent/profile/563084" target="_blank" rel="noopener">View YTJobs</a>
+            </div>
+          </article>
+
+          <article class="card contact-card" aria-label="Social links">
+            <a class="contact-link" href="mailto:editor.carloshenrique@gmail.com">
+              <strong>Email</strong>
+              <span>editor.carloshenrique@gmail.com</span>
+            </a>
+            <a class="contact-link" href="#" aria-label="Discord username">
+              <strong>Discord</strong>
+              <span>carlosvideoeditor</span>
+            </a>
+            <a class="contact-link" href="https://x.com/carlosvideoedit" target="_blank" rel="noopener">
+              <strong>X</strong>
+              <span>@carlosvideoedit</span>
+            </a>
+            <a class="contact-link" href="https://instagram.com/carlosvideoedit" target="_blank" rel="noopener">
+              <strong>Instagram</strong>
+              <span>@carlosvideoedit</span>
+            </a>
+            <a class="contact-link" href="https://tiktok.com/@carlosvideoeditor_" target="_blank" rel="noopener">
+              <strong>TikTok</strong>
+              <span>@carlosvideoeditor_</span>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Carlos Henrique — Minecraft Video Editor.</span>
+      <span>Focused edits for YouTube & Twitch creators.</span>
+    </div>
+  </footer>
+
+  <script>
+    const filterButtons = document.querySelectorAll(".filter-btn");
+    const videoCards = document.querySelectorAll(".video-card");
+
+    filterButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+
+        filterButtons.forEach((btn) => btn.classList.remove("active"));
+        button.classList.add("active");
+
+        videoCards.forEach((card) => {
+          const shouldShow = filter === "all" || card.dataset.type === filter;
+          card.classList.toggle("hide", !shouldShow);
+        });
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
