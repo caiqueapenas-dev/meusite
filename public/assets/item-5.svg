@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+ <defs><linearGradient id="g" x2=".55" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#6544d7"/><stop offset=".43" stop-color="#bb3896"/><stop offset=".72" stop-color="#ee4e59"/><stop offset="1" stop-color="#ffc34d"/></linearGradient></defs>
+ <path fill="#171425" d="M6 0h20v2h4v4h2v20h-2v4h-4v2H6v-2H2v-4H0V6h2V2h4z"/>
+ <path fill="url(#g)" d="M6 2h20v2h2v2h2v20h-2v2h-2v2H6v-2H4v-2H2V6h2V4h2z"/>
+ <path fill="#fff" fill-rule="evenodd" d="M9 5h14v2h2v2h2v14h-2v2h-2v2H9v-2H7v-2H5V9h2V7h2zm0 4v14h14V9zm4 2h6v2h2v6h-2v2h-6v-2h-2v-6h2zm1 3v4h4v-4z"/>
+ <path fill="#fff" d="M20 10h2v2h-2z"/>
+</svg>

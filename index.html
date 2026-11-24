@@ -1,6 +1,6 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!doctype html>
+<html lang="en">
+<head>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RNMBG28NKB"></script>
     <script>
@@ -9,18 +9,67 @@
       gtag('js', new Date());
 
       gtag('config', 'G-RNMBG28NKB');
-    </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Carlos Henrique is a Minecraft video editor for YouTube and Twitch creators. Shorts, long-form videos, pacing, captions, SFX, music, and clean storytelling edits."
-    />
-    <meta name="theme-color" content="#10141f" />
-    <title>Carlos Henrique | Minecraft Video Editor</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+    </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#10191b">
+  <meta name="description" content="Explore Carlos Henrique Silva’s Minecraft editing portfolio, from YouTube adventures to Shorts and Reels.">
+  <title>Carlos Video Editor | Minecraft Portfolio</title>
+  <link rel="icon" href="/assets/grass.webp">
+  <link rel="preload" as="font" type="font/ttf" href="/assets/MinecraftTen-VGORe.ttf" crossorigin>
+  <link rel="stylesheet" href="/style.css">
+  <script type="module" src="/assets/steve-renderer.js"></script>
+  <script src="/portfolio.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div id="loader" role="status" aria-label="Loading portfolio">
+    <span id="percentage">0%</span><canvas id="chunks" width="64" height="64" aria-hidden="true"></canvas>
+  </div>
+  <div id="game">
+    <header class="topbar">
+      <button class="brand" data-open="home" aria-label="Carlos Video Editor, home"><img src="/assets/logo.webp" alt="Carlos Video Editor"></button>
+      <button id="badge" class="badge" data-open="portfolio" hidden><img src="/assets/chest.webp" alt=""><span><b>Portfolio inventory</b><small id="badge-copy">Press E to open portfolio</small></span></button>
+    </header>
+    <main id="world">
+      <div class="moon" aria-hidden="true"></div>
+
+      <div class="layout" id="home">
+        <section class="intro">
+          <h1>Minecraft<br><em>Video Editor</em><span class="pixel-period">.</span></h1>
+          <p class="lead">Story-driven Minecraft edits for YouTube videos, Shorts, and Reels.</p>
+          <button class="block-button" data-open="portfolio"><span class="play-mark" aria-hidden="true"></span>Open portfolio <kbd>E</kbd></button>
+        </section>
+        <div class="stage" aria-hidden="true">
+          <div class="diorama">
+            <div class="steve"><img src="/assets/body.webp" alt=""><img class="steve-arm" src="/assets/arm.webp" alt=""><img class="steve-head" src="/assets/head.webp" alt=""></div>
+            <canvas id="steve-model" aria-label="Steve in the editing studio"></canvas>
+            <i class="spark spark-a"></i><i class="spark spark-b"></i><i class="spark spark-c"></i>
+          </div>
+        </div>
+      </div>
+      <aside id="side-note" hidden aria-labelledby="note-title"></aside>
+      <dialog id="panel" aria-labelledby="panel-title">
+        <div class="window-header"><h2 id="panel-title"></h2><button class="close" aria-label="Close panel">×</button></div>
+        <div id="panel-body"></div>
+      </dialog>
+      <dialog id="quote" aria-labelledby="quote-title">
+        <div class="window-header"><h2 id="quote-title">Request a quote</h2><button class="close" aria-label="Back to pricing">&times;</button></div>
+        <div class="quote-body">
+          <p id="quote-package"></p><p>How would you like to get in touch?</p>
+          <a id="quote-email"><img src="/assets/item-4.webp" alt="">Email Carlos</a>
+          <a href="https://www.instagram.com/carlosvideoedit/" target="_blank" rel="noopener noreferrer"><img src="/assets/item-5.svg" alt="">Message on Instagram</a>
+        </div>
+      </dialog>
+      <footer class="hud">
+        <div class="hud-box">
+          <div class="meters" aria-hidden="true"><i class="meter hearts"></i><i class="meter food"></i><i class="meter experience"></i></div>
+          <nav id="hotbar" aria-label="Portfolio sections"></nav>
+        </div>
+        <div class="key-hints"><span><kbd>1–9</kbd> Select slot</span><span><kbd>E</kbd> Portfolio</span><span><kbd>Esc</kbd> Close</span></div>
+        <div class="touch-hint">Tap an item to explore</div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
