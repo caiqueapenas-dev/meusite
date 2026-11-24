@@ -10,9 +10,9 @@ const contactContent = q('#contact-content').content.firstElementChild;
 const contactForm = contactContent.querySelector('form');
 const directEmail = contactContent.querySelector('#direct-email').textContent;
 contactForm.action = 'https://formsubmit.co/ajax/' + directEmail;
-const sections = ['Portfolio', 'Services', 'Pricing', 'Email', 'Instagram', null, null, null, 'About me'];
+const sections = ['Portfolio', 'Services', 'Pricing', 'Email', 'Instagram', 'Discord', null, null, 'About me'];
 const names = sections.map(name => name?.toLowerCase().replaceAll(' ', '-'));
-const item = number => number === 9 ? 'assets/vetor-carlos.webp' : 'assets/item-' + number + (number === 5 ? '.svg' : '.webp');
+const item = number => number === 6 ? "assets/discord.png" : number === 9 ? 'assets/vetor-carlos.webp' : 'assets/item-' + number + (number === 5 ? '.svg' : '.webp');
 const trades = [
   {name:'Short-form edit', price:'$60', image:1, description:'A vertical edit up to 1 minute for YouTube Shorts or Instagram Reels.'},
   {name:'Long-form edit', price:'$200', image:8, description:'A Minecraft video up to 20 minutes for your YouTube channel.'},
@@ -98,16 +98,28 @@ function inventory() {
 
 function services() {
   panelBody.innerHTML = `<div class="service-book" data-page="1">
-    <article class="leaf"><small>Page 1 of 2</small><h3>Shorts &amp; Reels</h3><p>Up to 1 minute</p><p>A quick hook, tight cuts, and readable captions bring your best Minecraft moments into a vertical edit.</p><button class="turn-page" data-page="2">Next page</button></article>
-    <article class="leaf"><small>Page 2 of 2</small><h3>YouTube videos</h3><p>Up to 20 minutes</p><p>I shape your gameplay into a story with pacing, sound design, and room for the payoff.</p><button class="book-pricing" data-open="pricing">View pricing</button><button class="turn-page" data-page="1">Previous page</button></article>
-  </div>`;
+    <article class="leaf"><small>Page 1 of 2</small><h3>Shorts &amp; Reels</h3><p>Up to 1 minute</p><p>Tight cuts and clear captions turn your best Minecraft moments into vertical videos.</p><button class="book-pricing" data-open="email">Hire me for a Short</button></article>
+    <article class="leaf"><small>Page 2 of 2</small><h3>YouTube videos</h3><p>Up to 20 minutes</p><p>I shape your gameplay into a story with sound design and room for the payoff.</p><button class="book-pricing" data-open="email">Hire me for a video</button></article>
+  </div>
+  <nav class="book-nav" aria-label="Book pages" lang="pt-BR">
+    <button data-page="1" disabled>Anterior</button><button data-page="2">Pr&oacute;xima p&aacute;gina</button>
+  </nav>`;
   const book = q('.service-book');
   revealArtwork(book,'services-book.webp');
-  book.querySelectorAll('.turn-page').forEach(button => button.onclick = () => {
+  const controls = q('.book-nav');
+  controls.querySelectorAll('button').forEach(button => button.onclick = () => {
     book.dataset.page = button.dataset.page;
-    book.querySelector('.leaf:nth-child(' + book.dataset.page + ') .turn-page').focus();
+    for (const control of controls.querySelectorAll('button')) control.disabled = control === button;
+    controls.querySelector('button:enabled').focus({preventScroll:true});
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const forward = book.dataset.page === '2';
+      const leaf = book.children[forward ? 1 : 0];
+      leaf.animate([
+        {transform: 'perspective(650px) rotateY(' + (forward ? -80 : 80) + 'deg)', filter:'brightness(.8)'},
+        {transform: 'perspective(650px) rotateY(0deg)', filter:'brightness(1)'}
+      ], {duration:350, easing:'ease-out'});
+    }
   });
-
 }
 
 function pricing() {
@@ -245,12 +257,13 @@ function openSection(section, trigger, packageName) {
     q('.intro').inert = !modal;
     panelBody.replaceChildren();
     if (modal) {
-      q('#panel-title').textContent = section === 'email' ? 'Email Carlos' : sections[names.indexOf(section)];
-      if (section === 'email') contact(packageName);
+      q('#panel-title').textContent = ['email','discord'].includes(section) ? 'Contact Carlos' : sections[names.indexOf(section)];
+      if (section === 'email' || section === 'discord') contact(packageName);
       else if (section === 'about-me') panelBody.append(q('#about-content').content.cloneNode(true));
       else ({portfolio:inventory, services, pricing})[section]();
       if (!panel.open) panel.showModal();
-      q('#panel .close').focus();
+      if (section === 'discord') q('[data-copy="discord-name"]').focus();
+      else q('#panel .close').focus();
     } else {
       if(panel.open) panel.close();
       instagramNote();

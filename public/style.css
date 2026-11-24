@@ -177,3 +177,20 @@ dialog:has(.trades){background:#c2c3c3}dialog:has(.trades) .window-header{justif
 @media (max-width: 420px) {
   #contact-form fieldset { grid-template-columns: minmax(0, 1fr); }
 }
+
+.book-nav { display: none; }
+@media (max-width:620px) and (orientation:portrait), (max-height:490px) and (orientation:landscape) and (max-width:950px) {
+  dialog:has(.service-book) { width:min(94vw, 26rem); overflow-y:auto; }
+  .service-book { aspect-ratio:auto; min-height:0; background-size:200% 100%; background-position:left; }
+  .service-book[data-page="2"] { background-position:right; }
+  .service-book .leaf, .service-book .leaf + .leaf { width:100%; padding:10% 14% 12%; font:1rem/1.4 Studio,sans-serif; }
+  .service-book[data-page="1"] .leaf:nth-child(2), .service-book[data-page="2"] .leaf:first-child { display:none; }
+  .service-book .leaf { transform-origin:left center; }
+  .service-book .leaf:first-child { transform-origin:right center; }
+  .leaf h3 { margin:1rem 0 .5rem; }
+  .leaf p { margin:.65rem 0; }
+  .leaf .book-pricing { margin-top:.4rem; padding:.5rem .75rem; }
+  .book-nav { display:grid; grid-template-columns:1fr 1fr; gap:.65rem; padding:.85rem .25rem .3rem; }
+  .book-nav button { min-height:44px; background:#575955; color:white; border:2px solid; border-color:#b7b9af #323630 #323630 #b7b9af; }
+  .book-nav button:disabled { background:#353833; color:#b6b9b2; }
+}
