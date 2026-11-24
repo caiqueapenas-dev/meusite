@@ -201,7 +201,16 @@ contactForm.addEventListener('submit', async event => {
       signal: controller.signal
     });
     const result = await response.json();
-    if (!response.ok || String(result.success) !== 'true') throw new Error('Submission declined');
+    if (!response.ok || String(result.success) !== 'true') {
+      status.textContent = typeof result.message === 'string' && result.message.trim()
+        ? 'FormSubmit: ' + result.message
+        : 'The email service could not accept your message (HTTP ' + response.status + '). Please try again or use the email address below.';
+      return;
+    }
+    if (typeof result.message === 'string' && /activat|confirm your email/i.test(result.message)) {
+      status.textContent = 'This form is awaiting activation by Carlos. You can email him directly below.';
+      return;
+    }
     contactForm.reset();
     status.textContent = 'Thanks! Your inquiry has been submitted.';
   } catch {
