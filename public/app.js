@@ -6,7 +6,10 @@ const panel = q('#panel');
 const panelBody = q('#panel-body');
 const sideNote = q('#side-note');
 const badge = q('#badge');
-const email = 'editor.carloshenriquesilva@gmail.com';
+const contactContent = q('#contact-content').content.firstElementChild;
+const contactForm = contactContent.querySelector('form');
+const directEmail = contactContent.querySelector('#direct-email').textContent;
+contactForm.action = 'https://formsubmit.co/ajax/' + directEmail;
 const sections = ['Portfolio', 'Services', 'Pricing', 'Email', 'Instagram', null, null, null, 'About me'];
 const names = sections.map(name => name?.toLowerCase().replaceAll(' ', '-'));
 const item = number => number === 9 ? 'assets/vetor-carlos.webp' : 'assets/item-' + number + (number === 5 ? '.svg' : '.webp');
@@ -133,7 +136,10 @@ function pricing() {
       });
       q('.exchange .well').innerHTML = '<img alt="" src="' + icon(trade.image) + '">';
       const play = q('.trade-play');
-      q('#quote-email').href = 'mailto:' + email + '?subject=' + encodeURIComponent('Minecraft editing inquiry — ' + trade.name);
+      q('#quote-email').onclick = () => {
+        q('#quote').close();
+        openSection('email', play, trade.name);
+      };
       play.setAttribute('aria-disabled','false');
       play.disabled = false;
       play.onclick = () => {
@@ -147,44 +153,79 @@ function pricing() {
   describe(null);
 }
 
-function note(section) {
-  const notes = {
-    email: ['Email','Tell me what you’re making and where you’d like a hand with the edit.','mailto:' + email,email,4],
-    instagram: ['Instagram','Have a clip or an idea to share? Send me a message on Instagram.','https://www.instagram.com/carlosvideoedit/','@carlosvideoedit',5],
-    'about-me': ['About me','My work centers on Minecraft editing. My favorite part of an edit is finding the story inside a long gameplay session.','', '',9]
-  };
-  const [title,copy,url,label,number] = notes[section];
-  sideNote.innerHTML = '<section class="note"><button class="close" aria-label="Close panel">×</button><img alt="" src="' + item(number) + '"><h2 id="note-title">' + title + '</h2><p>' + copy + '</p></section>';
-  if (url) {
-    const link = document.createElement('a');
-    link.href = url;
-    link.textContent = label;
-    if(section === 'instagram'){link.target = '_blank';link.rel = 'noopener noreferrer';}
-    q('.note').append(link);
-    if(section === 'email'){
-      const copy = document.createElement('button');
-      copy.className = 'copy-email';
-      copy.textContent = 'Copy email';
-      copy.setAttribute('aria-live','polite');
-      copy.onclick = async () => {
-        try { await navigator.clipboard.writeText(email); copy.textContent = 'Copied!'; }
-        catch { const range = document.createRange(); range.selectNodeContents(link); const selection = getSelection(); selection.removeAllRanges(); selection.addRange(range); copy.textContent = 'Email selected'; }
-      };
-      q('.note').append(copy);
-    }
-  } else {
-    const paragraph = document.createElement('p');
-    paragraph.textContent = 'Whether it’s a single block placed at just the right moment or a build that took hours, I want viewers to feel why it mattered.';
-    q('.note').append(paragraph);
-
+function contact(packageName) {
+  const detail = contactContent.querySelector('#contact-package');
+  if (!contactForm.querySelector('fieldset').disabled) {
+    detail.textContent = packageName || '';
+    detail.hidden = !packageName;
+    contactForm.querySelector('.form-status').textContent = '';
   }
+  panelBody.append(contactContent);
+}
+
+contactForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  const fields = contactForm.querySelector('fieldset');
+  if (fields.disabled) return;
+  for (const input of contactForm.querySelectorAll('[required]')) {
+    input.value = input.value.trim();
+  }
+  if (!contactForm.reportValidity()) return;
+  const data = Object.fromEntries(new FormData(contactForm));
+  const packageName = contactForm.querySelector('#contact-package').textContent;
+  if (packageName) data.package = packageName;
+  data._subject = 'Portfolio inquiry' + (packageName ? ' — ' + packageName : '');
+  const status = contactForm.querySelector('.form-status');
+  fields.disabled = true;
+  status.textContent = 'Sending…';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+      signal: controller.signal
+    });
+    const result = await response.json();
+    if (!response.ok || String(result.success) !== 'true') throw new Error('Submission declined');
+    contactForm.reset();
+    status.textContent = 'Thanks! Your inquiry has been submitted.';
+  } catch {
+    status.textContent = 'We couldn’t confirm the submission. Your message is still here. Try again or email me directly below.';
+  } finally {
+    clearTimeout(timeout);
+    fields.disabled = false;
+  }
+});
+
+contactContent.querySelectorAll('[data-copy]').forEach(button => {
+  button.addEventListener('click', async () => {
+    const target = contactContent.querySelector('#' + button.dataset.copy);
+    const status = contactForm.querySelector('.form-status');
+    try {
+      await navigator.clipboard.writeText(target.textContent);
+      status.textContent = button.dataset.copy === 'discord-name' ? 'Discord username copied.' : 'Email address copied.';
+    } catch {
+      const range = document.createRange();
+      range.selectNodeContents(target);
+      const selection = getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      status.textContent = 'Text selected for copying.';
+    }
+  });
+});
+
+function instagramNote() {
+  sideNote.innerHTML = '<section class="note"><button class="close" aria-label="Close panel">×</button><img alt="" src="' + item(5) + '"><h2 id="note-title">Instagram</h2><p>Have a clip or an idea to share? Send me a message on Instagram.</p><a href="https://www.instagram.com/carlosvideoedit/" target="_blank" rel="noopener noreferrer">@carlosvideoedit</a></section>';
   sideNote.hidden = false;
   world.classList.add('show-note');
-  sideNote.classList.toggle('on-right',section === 'instagram');
+  sideNote.classList.add('on-right');
   q('.note .close').focus({preventScroll:true});
 }
 
-function openSection(section, trigger) {
+function openSection(section, trigger, packageName) {
   if (section === 'home') {
     current = 'home';
     if (panel.open) panel.close();
@@ -197,20 +238,22 @@ function openSection(section, trigger) {
   } else {
     if (current === 'home') returnFocus = trigger && trigger !== badge ? trigger : q('.intro button');
     current = section;
-    const modal = ['portfolio','services','pricing'].includes(section);
+    const modal = section !== 'instagram';
     badge.hidden = true;
     sideNote.hidden = true;
     world.classList.remove('show-note');
     q('.intro').inert = !modal;
     panelBody.replaceChildren();
     if (modal) {
-      q('#panel-title').textContent = section === 'pricing' ? 'Pricing' : sections[names.indexOf(section)];
-      ({portfolio:inventory, services, pricing})[section]();
+      q('#panel-title').textContent = section === 'email' ? 'Email Carlos' : sections[names.indexOf(section)];
+      if (section === 'email') contact(packageName);
+      else if (section === 'about-me') panelBody.append(q('#about-content').content.cloneNode(true));
+      else ({portfolio:inventory, services, pricing})[section]();
       if (!panel.open) panel.showModal();
       q('#panel .close').focus();
     } else {
       if(panel.open) panel.close();
-      note(section);
+      instagramNote();
     }
   }
   q('#hotbar .active')?.classList.remove('active');
@@ -239,6 +282,7 @@ document.addEventListener('click', e => {
 panel.addEventListener('cancel', e => {e.preventDefault();openSection('home')});
 document.addEventListener('keydown', e => {
   if(q('#quote').open) return;
+  if(e.key !== 'Escape' && e.target.closest('input, textarea, select, [contenteditable="true"]')) return;
   if(e.repeat || e.ctrlKey || e.metaKey || e.altKey || !q('#loader').hidden) return;
   let section;
   if(e.key.toLowerCase() === 'e') section = current === 'portfolio' ? 'home' : 'portfolio';

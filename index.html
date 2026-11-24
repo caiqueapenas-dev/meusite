@@ -38,7 +38,8 @@
         <section class="intro">
           <h1>Minecraft<br><em>Video Editor</em><span class="pixel-period">.</span></h1>
           <p class="lead">Story-driven Minecraft edits for YouTube videos, Shorts, and Reels.</p>
-          <button class="block-button" data-open="portfolio"><span class="play-mark" aria-hidden="true"></span>Open portfolio <kbd>E</kbd></button>
+          <button class="block-button" data-open="portfolio"><span class="play-mark" aria-hidden="true"></span>Open portfolio <kbd>E</kbd></button>
+          <button class="contact-link" data-open="email">Email Carlos</button>
         </section>
         <div class="stage" aria-hidden="true">
           <div class="diorama">
@@ -53,11 +54,45 @@
         <div class="window-header"><h2 id="panel-title"></h2><button class="close" aria-label="Close panel">×</button></div>
         <div id="panel-body"></div>
       </dialog>
+      <template id="contact-content">
+        <div class="contact-content">
+          <p class="contact-intro">Tell me about your video. I'll reply to the email you leave here.</p>
+          <form id="contact-form" method="post">
+            <fieldset>
+              <legend class="visually-hidden">Project inquiry</legend>
+              <p id="contact-package" hidden></p>
+              <label>Name<input name="name" autocomplete="name" maxlength="100" required></label>
+              <label>Channel name or link<input name="channel" maxlength="300" required></label>
+              <label class="wide">Your email<input type="email" name="email" autocomplete="email" maxlength="254" required></label>
+              <label class="wide">Message<textarea name="message" rows="4" maxlength="5000" required></textarea></label>
+              <input type="text" name="_honey" hidden tabindex="-1" autocomplete="off">
+              <button class="block-button" type="submit">Send message</button>
+            </fieldset>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+          <div class="contact-details">
+            <div><strong>Email</strong> <a id="direct-email" href="mailto:editor.carloshenrique@gmail.com">editor.carloshenrique@gmail.com</a>
+              <button type="button" data-copy="direct-email" aria-label="Copy email address">Copy email</button></div>
+            <div><strong>Discord</strong> <span id="discord-name">carlosvideoeditor</span>
+              <button type="button" data-copy="discord-name" aria-label="Copy Discord username">Copy username</button></div>
+          </div>
+        </div>
+      </template>
+      <template id="about-content">
+        <article class="about-story">
+          <img src="/assets/vetor-carlos.webp" alt="">
+          <p>I'm Carlos, a YouTube editor with six years of editing experience. I've played Minecraft since I was 13. When I watch hours of footage, I'm looking for the moment that makes the whole session worth sharing. Sometimes it's the finished build. Sometimes it's the creeper you hear a second too late.</p>
+          <h3>My story</h3>
+          <p>My dad sings, my mom paints, and I grew up playing guitar. At 20, during the pandemic, I bought my first camera, a Canon 250D. One of the first things I made was a short documentary about young people in my hometown. That's where I fell in love with editing.</p>
+          <p>Today I cut gameplay in Premiere Pro, build motion graphics in After Effects, and use Flashback and ReplayMod to show a scene from another angle. My favorite part is getting the timing right, whether that means cutting straight to a joke or letting the music drop out before a big reveal.</p>
+          <button class="block-button" data-open="email">Email Carlos</button>
+        </article>
+      </template>
       <dialog id="quote" aria-labelledby="quote-title">
         <div class="window-header"><h2 id="quote-title">Request a quote</h2><button class="close" aria-label="Back to pricing">&times;</button></div>
         <div class="quote-body">
           <p id="quote-package"></p><p>How would you like to get in touch?</p>
-          <a id="quote-email"><img src="/assets/item-4.webp" alt="">Email Carlos</a>
+          <button id="quote-email" type="button"><img src="/assets/item-4.webp" alt="">Email Carlos</button>
           <a href="https://www.instagram.com/carlosvideoedit/" target="_blank" rel="noopener noreferrer"><img src="/assets/item-5.svg" alt="">Message on Instagram</a>
         </div>
       </dialog>
