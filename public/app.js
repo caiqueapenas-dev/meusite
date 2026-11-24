@@ -263,7 +263,15 @@ function openSection(section, trigger, packageName) {
       else if (section === 'about-me') panelBody.append(q('#about-content').content.cloneNode(true));
       else ({portfolio:inventory, services, pricing})[section]();
       if (!panel.open) panel.showModal();
-      if (section === 'discord') q('[data-copy="discord-name"]').focus();
+      if (section === 'discord' || (section === 'email' && trigger?.matches('.slot, .contact-link'))) {
+        const copy = q(section === 'discord' ? '[data-copy="discord-name"]' : '[data-copy="direct-email"]');
+        copy.focus();
+        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          copy.animate([{transform:'translateY(0)'},{transform:'translateY(-9px)',offset:.3},
+            {transform:'translateY(0)',offset:.55},{transform:'translateY(-4px)',offset:.75},
+            {transform:'translateY(0)'}], {duration:1200,easing:'ease-in-out'});
+        }
+      }
       else q('#panel .close').focus();
     } else {
       if(panel.open) panel.close();
@@ -276,6 +284,23 @@ function openSection(section, trigger, packageName) {
   slot?.classList.add('active');
   if(section !== 'home' && !matchMedia('(prefers-reduced-motion: reduce)').matches) slot?.animate([{transform:'scale(.90)',filter:'brightness(1.5)'},{transform:'scale(1)',filter:'brightness(1)'}],{duration:230});
 }
+const sounds = {
+  menu: new Audio('/audio/minecraft click menu.mp3'),
+  book: new Audio('/audio/book.mp3'),
+  trade: new Audio('/audio/Minecraft Villager Sound.mp3')
+};
+function playSound(name) {
+  const sound = sounds[name];
+  sound.currentTime = 0;
+  sound.play().catch(() => {});
+}
+document.addEventListener('click', event => {
+  const control = event.target.closest('button:enabled, a[href]');
+  if (!control) return;
+  if (control.closest('.book-nav')) playSound('book');
+  else if (control.matches('.trade, .trade-play')) playSound('trade');
+  else playSound('menu');
+}, true);
 document.addEventListener('click', e => {
   if (e.target.closest('#quote')) {
     if (e.target.closest('.close') || e.target === q('#quote')) q('#quote').close();
@@ -302,7 +327,7 @@ document.addEventListener('keydown', e => {
   if(e.key.toLowerCase() === 'e') section = current === 'portfolio' ? 'home' : 'portfolio';
   if(e.key === 'Escape' && current !== 'home') section = 'home';
   if(/^[1-9]$/.test(e.key)) section = names[Number(e.key)-1];
-  if(section){e.preventDefault();openSection(section,document.activeElement instanceof HTMLButtonElement ? document.activeElement : null);}
+  if(section){e.preventDefault();playSound('menu');openSection(section,q('#hotbar [data-open="' + section + '"]'));}
 });
 document.addEventListener('pointermove', e => {
   if(e.pointerType !== 'mouse' || panel.open || matchMedia('(prefers-reduced-motion: reduce)').matches) return;

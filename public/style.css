@@ -194,3 +194,27 @@ dialog:has(.trades){background:#c2c3c3}dialog:has(.trades) .window-header{justif
   .book-nav button { min-height:44px; background:#575955; color:white; border:2px solid; border-color:#b7b9af #323630 #323630 #b7b9af; }
   .book-nav button:disabled { background:#353833; color:#b6b9b2; }
 }
+
+.contact-link, .contact-details button {
+  background:#f3bc70;
+  color:#39250f;
+  border:2px solid;
+  border-color:#ffe3ac #93602f #93602f #ffe3ac;
+  box-shadow:0 2px #442c18;
+  padding:.5rem .8rem;
+  text-decoration:none;
+}
+.contact-link:hover, .contact-details button:hover { background:#ffd59a; }
+@media (max-width:700px) and (orientation:portrait) {
+  #world:not(.show-note) {
+    display:grid;
+    grid-template-rows:minmax(0,1fr) auto;
+    row-gap:clamp(18px,3dvh,32px);
+    padding-bottom:calc(14px + env(safe-area-inset-bottom));
+  }
+  #world:not(.show-note) .layout { position:relative; inset:auto; height:100%; margin:0; padding-bottom:0; }
+  #world:not(.show-note) .hud { position:static; transform:none; }
+  .intro .lead { margin:clamp(12px,2dvh,20px) auto clamp(18px,2.8dvh,28px); }
+  .intro .contact-link { margin:0 .3rem; vertical-align:middle; }
+  .intro .block-button { vertical-align:middle; }
+}
