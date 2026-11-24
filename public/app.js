@@ -105,7 +105,8 @@ function services() {
     <button data-page="1" disabled>Anterior</button><button data-page="2">Pr&oacute;xima p&aacute;gina</button>
   </nav>`;
   const book = q('.service-book');
-  revealArtwork(book,'services-book.webp');
+  const mobileBook = matchMedia('(max-width:620px) and (orientation:portrait), (max-height:490px) and (orientation:landscape) and (max-width:950px)').matches;
+  revealArtwork(book, mobileBook ? 'services-book-mobile.webp' : 'services-book.webp');
   const controls = q('.book-nav');
   controls.querySelectorAll('button').forEach(button => button.onclick = () => {
     book.dataset.page = button.dataset.page;
